@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content='IE=edge'>
+        <title>Group 1</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+        <link rel="stylesheet" href="">
+    </head>
+
+    <body>
+        <header>
+            <h1>Group 1</h1>
+        </header>
+        <nav>
+            <a href="restaurants.html">Restaurants</a>
+            <a href="chefs.html">Chefs</a>
+            <a href="recipes.html">Recipes</a>
+            <a href="ingredients.html">Ingredients</a>
+        </nav>
+        <main>
+        <section>
+        <h2>Recipes</h2>
+        <table>
+            <caption>Chef Recipes</caption>
+            <thead>
+            <tr>
+                <th>Recipe Name</th>
+                <th>Recipe Description</th>
+                <th>Cook Time</th>
+                <th>Food Category</th>
+                <th>Recipe Steps</th>
+                <th>Edit Recipe</th>
+                <th>Delete Recipe</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Salsa</td>
+                <td>Fresh Salsa Recipe</td>
+                <td>15 minutes</td>
+                <td>Appetizer</td>
+                <td>Steps</td>
+                <td><button type="edit">Edit</button></td>
+                <td><button type="delete">Delete</button></td>
+            </tr>
+            <tr>
+                <td>Chicken Tikka Masala</td>
+                <td>Chicken Curry Recipe</td>
+                <td>45 Minutes</td>
+                <td>Entree</td>
+                <td>Steps</td>
+                <td><button type="edit">Edit</button></td>
+                <td><button type="delete">Delete</button></td>
+            </tr>
+            <tr>
+                <td>House Salad</td>
+                <td>Fresh House Salad</td>
+                <td>10 minutes</td>
+                <td>Salad</td>
+                <td>Steps</td>
+                <td><button type="edit">Edit</button></td>
+                <td><button type="delete">Delete</button></td>
+            </tr>
+        </tbody>
+        </table>
+        <button type="new">Add New Recipe</button>
+        <p>&nbsp;</p>
+
+        <form method="POST" id="addRecipe">
+            <legend>Add Recipe</legend>
+            <fieldset class="fields">
+                <label>Recipe Name</label> <input type="text" name="recipename">
+                <label>Recipe Description</label> <input type="text" name="description">
+                <label>Cook Time</label> <input type="text" name="ctime"> <select name="time">
+                    <option value="Select Time">Select Time</option>
+                    <option value="Hours">Hours</option>
+                    <option value="Minutes">Minutes</option> 
+                </select>
+                <p>&nbsp;</p>
+                <label>Recipe Steps</label>
+                <div>
+                <textarea
+                name="Recipe Steps" id="Recipe Steps"
+                rows="5" cols="40"
+                minlength="0"
+                maxlength="300"
+                placeholder="Input steps for recipe"></textarea>
+            </div>         
+            </fieldset>
+            <button type="new">Add New Recipe</button>
+        </section>
+        </main>
+    </body>
+</html>
