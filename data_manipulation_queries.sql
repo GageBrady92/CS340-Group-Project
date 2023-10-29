@@ -43,8 +43,7 @@ UPDATE Chefs SET first_name = :first_name, last_name = :last_name, email = :emai
 -- 1 DELETE (M:M)
 -- delete chef
 DELETE FROM Chefs WHERE chef_id = :chef_id;
+-- Remove ingredient from recipe
+DELETE FROM RecipeIngredientDetails WHERE recipe_id = :recipe_id AND ingredient_id = :ingredient_id
 
-
--- dynamically populated drop down list or ability to serach using text
--- 
 
