@@ -7,7 +7,9 @@
 -- select all restaurants
 SELECT restaurant_id, location, food_type FROM Restaurants;
 -- select all chefs
-SELECT chef_id, first_name, last_name, email, restaurant_id FROM Chefs;
+SELECT c.chef_id, c.first_name, c.last_name, c.email, r.location AS restaurant_location
+FROM Chefs AS c
+INNER JOIN Restaurants AS r ON c.restaurant_id = r.id;
 -- select all recipes
 SELECT recipe_id, recipe_name, recipe_description, cook_time, food_category, recipe_steps FROM Recipes;
 -- select all ingredients
