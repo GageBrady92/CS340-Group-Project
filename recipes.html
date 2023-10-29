@@ -91,6 +91,29 @@
             </div>         
             </fieldset>
             <button type="new">Add New Recipe</button>
+            <p>&nbsp;</p>
+
+            <form method="POST" id="editRecipe">
+                <legend>Edit Recipe</legend>
+                <fieldset class="fields">
+                    <label>Recipe Name</label> <input type="text" name="recipename">
+                    <label>Recipe Description</label> <input type="text" name="description">
+                    <label>Cook Time</label> <input type="text" name="ctime"> <select name="time">
+                        <option value="Select Time">Select Time</option>
+                        <option value="Hours">Hours</option>
+                        <option value="Minutes">Minutes</option> 
+                    </select>
+                    <p>&nbsp;</p>
+                    <label>Recipe Steps</label>
+                    <div>
+                    <textarea
+                    name="Recipe Steps" id="Recipe Steps"
+                    rows="5" cols="40"
+                    minlength="0"
+                    maxlength="300"
+                    placeholder="Input steps for recipe"></textarea>
+                </div> 
+                <button type="new">Add New Recipe</button>
         </section>
         </main>
     </body>
