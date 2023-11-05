@@ -85,7 +85,8 @@ CREATE TABLE RecipeIngredientDetails (
 INSERT INTO Restaurants (location, food_type) 
 VALUES ('Mexican Restaurant', 'Mexican'),
     ('Indian Restaurant', 'Indian'),
-    ('Italian Restaurant', 'Italian');
+    ('Italian Restaurant', 'Italian'),
+    ('American Restaurant', 'American');
 
 -- insert data into the Chefs table
 INSERT INTO Chefs (first_name, last_name, email, restaurant_id) 
