@@ -64,17 +64,17 @@ addRowToTable = (data) => {
 
     // Create a row and 4 cells
     let row = document.createElement("TR");
-    let idCell = document.createElement("TD");
+    let restaurant_idCell = document.createElement("TD");
     let locationCell = document.createElement("TD");
     let foodTypeCell = document.createElement("TD");
 
     // Fill the cells with correct data
-    idCell.innerText = newRow.id;
+    restaurant_idCell.innerText = newRow.id;
     locationCell.innerText = newRow.location;
     foodTypeCell.innerText = newRow.food_type;
 
     // Add the cells to the row 
-    row.appendChild(idCell);
+    row.appendChild(restaurant_idCell);
     row.appendChild(locationCell);
     row.appendChild(foodTypeCell);
     
