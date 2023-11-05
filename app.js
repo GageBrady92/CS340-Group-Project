@@ -44,47 +44,47 @@ app.get('/', function(req, res)
 
 
 
-app.post('/add-restaurant-form', function(req, res) 
-{
-    // Capture the incoming data and parse it back to a JS object
-    let data = req.body;
-
-    // Capture NULL values
-    // let homeworld = parseInt(data.homeworld);
-    // if (isNaN(homeworld))
-    // {
-    //     homeworld = 'NULL'
-    // }
-
-    // let age = parseInt(data.age);
-    // if (isNaN(age))
-    // {
-    //     age = 'NULL'
-    // }
-
-    // Create the query and run it on the database
-    query1 = `INSERT INTO Restaurants (location, food_type) VALUES ('${data['location']}', '${data['food_type']}')`;
-    db.pool.query(query1, function(error, rows, fields){
-
-        // Check to see if there was an error
-        if (error) {
-
-            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
-            console.log(error)
-            res.sendStatus(400);
-        }
-
-        // If there was no error, we redirect back to our root route, which automatically runs the SELECT * FROM bsg_people and
-        // presents it on the screen
-        else
-        {
-            res.redirect('/');
-        }
+    app.post('/add-location-form', function(req, res){
+        // Capture the incoming data and parse it back to a JS object
+        let data = req.body;
+    
+        // // Capture NULL values
+        // let homeworld = parseInt(data['input-homeworld']);
+        // if (isNaN(homeworld))
+        // {
+        //     homeworld = 'NULL'
+        // }
+    
+        // let age = parseInt(data['input-age']);
+        // if (isNaN(age))
+        // {
+        //     age = 'NULL'
+        // }
+    
+        // Create the query and run it on the database
+        query1 = `INSERT INTO Restaurants (location, food_type) VALUES ('${data['input-location']}', '${data['input-food-type']}')`;
+        db.pool.query(query1, function(error, rows, fields){
+    
+            // Check to see if there was an error
+            if (error) {
+    
+                // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+                console.log(error)
+                res.sendStatus(400);
+            }
+    
+            // If there was no error, we redirect back to our root route, which automatically runs the SELECT * FROM bsg_people and
+            // presents it on the screen
+            else
+            {
+                res.redirect('/');
+            }
+        })
     })
-});
-/*
-    LISTENER
-*/
-app.listen(PORT, function(){            // This is the basic syntax for what is called the 'listener' which receives incoming requests on the specified PORT.
-    console.log('Express started on http://localhost:' + PORT + '; press Ctrl-C to terminate.')
-});
+    
+    /*
+        LISTENER
+    */
+    app.listen(PORT, function(){
+        console.log('Express started on http://localhost:' + PORT + '; press Ctrl-C to terminate.')
+    });
