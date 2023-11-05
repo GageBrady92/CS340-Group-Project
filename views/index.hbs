@@ -33,12 +33,11 @@
     </tbody>
 </table>
 
-<!-- /views/index.hbs -->
 
 {{!-- Form to add a record to the table  --}}
-<h2>Adding Data with AJAX</h2>
-<p>To add a new restaurant, please enter their information below and click 'Submit'!</p>
-<form id="add-restaurant-form-ajax">
+<h2>Adding Data using an HTML form</h2>
+<p>To add a new restaurant, please enter their information below nad click `Submit`!</p>
+<form id="add-restaurant-form" method="POST" action="/add-restaurant-form">
     <label for="input-location">Restaurant Name: </label>
     <input type="text" name="input-location" id="input-location">
     
@@ -48,5 +47,17 @@
     <input type="submit">
 </form>
 
-{{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
-<script src="./js/add_restaurant.js"></script>
+{{!-- <h2>Adding Data with AJAX</h2>
+<p>To add a new restaurant, please enter their information below and click 'Submit'!</p>
+<form id="add-restaurant-form-ajax">
+    <label for="input-location">Restaurant Name: </label>
+    <input type="text" name="input-location" id="input-location">
+    
+    <label for="input-food-type">Food Style: </label>
+    <input type="text" name="input-food-type" id="input-food-type">
+
+    <input type="submit">
+</form> --}}
+
+{{!-- Embed our javascript to handle the DOM manipulation and AJAX request
+<script src="./js/add_restaurant.js"></script> --}}
