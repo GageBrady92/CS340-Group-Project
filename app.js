@@ -25,15 +25,41 @@ app.use(express.static('public'));
 // app.js
 
 app.get('/', function(req, res)
-    {  
-        let query1 = "SELECT * FROM Restaurants;";               // Define our query
+{
+    // Declare Query 1
+    let query1;
 
-        db.pool.query(query1, function(error, rows, fields){    // Execute the query
+    // If there is no query string, we just perform a basic SELECT
+    if (req.query.location === undefined)
+    {
+        query1 = "SELECT * FROM Restaurants;";
+    }
 
-            res.render('index', {data: rows});                  // Render the index.hbs file, and also send the renderer
-        })                                                      // an object where 'data' is equal to the 'rows' we
+    // If there is a query string, we assume this is a search, and return desired results
+    else
+    {
+        query1 = `SELECT * FROM Restaurants WHERE location LIKE "${req.query.location}%"`
+    }
 
-    });
+    // Query 2 is the same in both cases
+    let query2 = "SELECT * FROM Restaurants;";
+
+    // Run the 1st query
+    db.pool.query(query1, function(error, rows, fields){
+        
+        // Save the people
+        let location = rows;
+        
+        // Run the second query
+        db.pool.query(query2, (error, rows, fields) => {
+            
+            // Save the planets
+            let location = rows;
+
+            return res.render('index', {data: location, location: location});
+        })
+    })
+});
     
     app.post('/add-restaurant-ajax', function(req, res) 
     {
