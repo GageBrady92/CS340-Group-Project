@@ -44,21 +44,21 @@ app.get('/', function(req, res)
 
 
 
-    app.post('/add-location-form', function(req, res){
+    app.post('../add-location-form', function(req, res){
         // Capture the incoming data and parse it back to a JS object
         let data = req.body;
     
         // // Capture NULL values
-        // let homeworld = parseInt(data['input-homeworld']);
-        // if (isNaN(homeworld))
+        // let location = parseInt(data['input-location']);
+        // if (isNaN(location))
         // {
-        //     homeworld = 'NULL'
+        //     location= 'NULL'
         // }
     
-        // let age = parseInt(data['input-age']);
-        // if (isNaN(age))
+        // let food_type = parseInt(data['input-food-type']);
+        // if (isNaN(food_type))
         // {
-        //     age = 'NULL'
+        //     food_type = 'NULL'
         // }
     
         // Create the query and run it on the database
