@@ -48,6 +48,7 @@ app.get('/', function(req, res)
             return res.render('index', {data: location});
     })
 });
+
     
     app.post('/add-restaurant-ajax', function(req, res) 
     {
@@ -186,6 +187,41 @@ app.get('/', function(req, res)
     //               }
     //   })});
     
+app.put('/put-restaurant-ajax', function(req,res,next){
+    let data = req.body;
+    
+    let location = parseInt(data.location);
+    let food_type = parseInt(data.foodType);
+    
+    let queryUpdateRestaurant = `UPDATE Restaurants SET location = ? WHERE Restaurants.restaurant_id = ?`;
+    let selectRestaurant = `SELECT * FROM Restaurants WHERE restaurant_id = ?`
+    
+            // Run the 1st query
+            db.pool.query(queryUpdateRestaurant, [location, food_type], function(error, rows, fields){
+                if (error) {
+    
+                // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+                console.log(error);
+                res.sendStatus(400);
+                }
+    
+                // If there was no error, we run our second query and return that data so we can use it to update the people's
+                // table on the front-end
+                else
+                {
+                    // Run the second query
+                    db.pool.query(selectRestaurant, [location], function(error, rows, fields) {
+    
+                        if (error) {
+                            console.log(error);
+                            res.sendStatus(400);
+                        } else {
+                            res.send(rows);
+                        }
+                    })
+                }
+    })});
+
 /*
     LISTENER
 */
