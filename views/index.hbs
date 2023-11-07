@@ -54,7 +54,7 @@
 <script src="./js/add_restaurant.js"></script>
 
 {{!-- Form to add a record to the table  --}}
-<h2>Adding Data using an HTML form</h2>
+<h2>Adding Data Using an HTML Form</h2>
 <p>To add a new restaurant, please enter their information below nad click `Submit`!</p>
 <form id="add-location-form" method="POST" action="/add-location-form">
     <label for="input-location">Location Name: </label>
@@ -75,3 +75,28 @@
     <input type="submit">
     <a href='/'><button>Reset</button></a>
 </form>
+
+<h2>Updating Restaurant Form</h2>
+<p>To update a specific restaurant select the name from the drop-down menu on the left and their desired food type from the drop down menu on the right</p>
+<form id="update-restaurant-form-ajax">
+
+    <label for="input-location">Location: </label>
+    <select name="input-location" id="mySelect">
+        <option value="test">Select a Location</option>
+        {{#each data}}
+        <option value="{{this.restaurant_id}}">{{this.location}}</option>
+        {{/each}}
+    </select>
+
+    <label for="input-food-type">Food Type: </label>
+    <select name="input-food-type" id="input-food-type-update">
+        <option>Select a Food Type</option>
+        {{#each food-type}}
+        <option value="{{this.restaurant_id}}">{{this.food-type}}</option>
+        {{/each}}
+    </select>
+    <input type="submit">
+
+</form>
+
+<script src="./js/update_restaurant.js"></script>
