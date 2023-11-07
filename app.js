@@ -140,7 +140,7 @@ app.get('/', function(req, res)
 
     app.delete('/delete-restaurant-ajax/', function (req, res, next) {
         let data = req.body;
-        let restaurantID = parseInt(data.id);
+        let restaurantID = parseInt(data.restaurant_id);
         let deleteRestaurant = `DELETE FROM Restaurants WHERE restaurant_id = ?`;
     
         // Run the 1st query
