@@ -28,10 +28,12 @@
             <td>{{this.restaurant_id}}</td>
             <td>{{this.location}}</td>
             <td>{{this.food_type}}</td>
+            <td><button onclick="deleteRestaurant({{this.restaurant_id}})">Delete</button></td>
         </tr>
         {{/each}}
     </tbody>
 </table>
+<script src="./js/delete_restaurant.js"></script>
 
 <!-- /views/index.hbs -->
 
