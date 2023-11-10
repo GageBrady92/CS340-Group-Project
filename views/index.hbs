@@ -88,6 +88,9 @@
         {{/each}}
     </select>
 
+    {{!-- <label for="input-food-type">Food Type: </label>
+    <input type="text" name="input-food-type" id="input-food-type"> --}}
+
     <label for="input-food-type">Food Type: </label>
     <select name="input-food-type" id="input-food-type-update">
         <option>Select a Food Type</option>
@@ -95,6 +98,7 @@
         <option value="{{this.restaurant_id}}">{{this.food-type}}</option>
         {{/each}}
     </select>
+
     <input type="submit">
 
 </form>
