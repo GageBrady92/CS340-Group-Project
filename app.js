@@ -3,7 +3,7 @@ var app = express();
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
  
-PORT = 10168;
+PORT = 10167;
  
 // Database
 var db = require('./database/db-connector');
@@ -190,11 +190,11 @@ app.get('/', function(req, res)
 app.put('/put-restaurant-ajax', function(req,res,next){
     let data = req.body;
     
-    let location = parseInt(data.location);
-    let food_type = parseInt(data.foodType);
+    let location = (data.location);
+    let food_type = (data.foodType);
     
     // let queryUpdateRestaurant = `UPDATE Restaurants SET location = ? WHERE Restaurants.restaurant_id = ?`;
-    let queryUpdateRestaurant = `UPDATE Restaurants SET location = ? WHERE restaurant_id = ?`;
+    let queryUpdateRestaurant = `UPDATE Restaurants SET food_type = ? WHERE restaurant_id = ?`;
     let selectRestaurant = `SELECT * FROM Restaurants WHERE restaurant_id = ?`
     
             // Run the 1st query

@@ -38,13 +38,13 @@ updateRestaurantForm.addEventListener("submit", function (e) {
 
     // Tell our AJAX request how to resolve
     xhttp.onreadystatechange = () => {
-        if (xhttp.readyState == 3 && xhttp.status == 200) {
+        if (xhttp.readyState == 4 && xhttp.status == 200) {
 
             // Add the new data to the table
             updateRow(xhttp.response, locationValue);
 
         }
-        else if (xhttp.readyState == 3 && xhttp.status != 200) {
+        else if (xhttp.readyState == 4 && xhttp.status != 200) {
             console.log("There was an error with the input.")
         }
     }
@@ -69,10 +69,10 @@ function updateRow(data, restaurantID){
             let updateRowIndex = table.getElementsByTagName("tr")[i];
 
             // Get td of homeworld value
-            let td = updateRowIndex.getElementsByTagName("td")[3];
+            let td = updateRowIndex.getElementsByTagName("td")[2];
 
             // Reassign homeworld to our value we updated to
-            td.innerHTML = parsedData[0].name; 
+            td.innerHTML = parsedData[0].location; 
        }
     }
 }
