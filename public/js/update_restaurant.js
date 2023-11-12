@@ -13,8 +13,8 @@ updateRestaurantForm.addEventListener("submit", function (e) {
     let inputFoodType = document.getElementById("input-food-type-update");
 
     // Get the values from the form fields
-    let location = inputLocation.value;
-    let foodType = inputFoodType.value;
+    let locationValue = inputLocation.value;
+    let foodTypeValue = inputFoodType.value;
     
     // currently the database table for bsg_people does not allow updating values to NULL
     // so we must abort if being bassed NULL for homeworld
