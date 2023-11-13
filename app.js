@@ -190,15 +190,16 @@ app.get('/', function(req, res)
 app.put('/put-restaurant-ajax', function(req,res,next){
     let data = req.body;
     
-    let location = parseInt(data.location);
-    let food_type = data.foodType;
+    let location = parseInt(data.restaurant_id);
+    let foodType = data.food_type;
     
     // let queryUpdateRestaurant = `UPDATE Restaurants SET location = ? WHERE Restaurants.restaurant_id = ?`;
-    let queryUpdateRestaurant = `UPDATE Restaurants SET food_type = ? WHERE restaurant_id = ?`;
-    let selectRestaurant = `SELECT * FROM Restaurants WHERE restaurant_id = ?`
+    // let queryUpdateRestaurant = `UPDATE Restaurants SET food_type = ? WHERE restaurant_id = ?`;
+    let queryUpdateRestaurant = `UPDATE Restaurants SET Restaurants.food_type = '${foodType}' Restaurants.restaurant_id = '${location}';`;
+    let selectRestaurant = `SELECT * FROM Restaurants WHERE Restaurants.restaurant_id = '${location}';`
     
             // Run the 1st query
-            db.pool.query(queryUpdateRestaurant, [location, food_type], function(error, rows, fields){
+            db.pool.query(queryUpdateRestaurant, [food_type, location], function(error, rows, fields){
                 if (error) {
     
                 // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.

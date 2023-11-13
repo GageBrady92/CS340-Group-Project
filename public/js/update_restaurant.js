@@ -19,10 +19,10 @@ updateRestaurantForm.addEventListener("submit", function (e) {
     // currently the database table for bsg_people does not allow updating values to NULL
     // so we must abort if being bassed NULL for homeworld
 
-    if (isNaN(foodTypeValue)) 
-    {
-        return;
-    }
+    // if (isNaN(foodTypeValue)) 
+    // {
+    //     return;
+    // }
 
 
     // Put our data we want to send in a javascript object
@@ -59,7 +59,7 @@ function updateRow(data, restaurantID){
     let parsedData = JSON.parse(data);
     
     let table = document.getElementById("restaurant-table");
-
+    console.log(data)
     for (let i = 0, row; row = table.rows[i]; i++) {
        //iterate through rows
        //rows would be accessed using the "row" variable assigned in the for loop
