@@ -190,11 +190,11 @@ app.get('/', function(req, res)
 app.put('/put-restaurant-ajax', function(req,res,next){
     let data = req.body;
     
-    let location = data.location;
+    let location = parseInt(data.location);
     let food_type = data.foodType;
     
     // let queryUpdateRestaurant = `UPDATE Restaurants SET location = ? WHERE Restaurants.restaurant_id = ?`;
-    let queryUpdateRestaurant = `UPDATE Restaurants SET food_type = ? WHERE Restaurant.restaurant_id = ?`;
+    let queryUpdateRestaurant = `UPDATE Restaurants SET food_type = ? WHERE restaurant_id = ?`;
     let selectRestaurant = `SELECT * FROM Restaurants WHERE restaurant_id = ?`
     
             // Run the 1st query
