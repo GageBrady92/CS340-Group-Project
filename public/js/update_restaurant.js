@@ -19,16 +19,16 @@ updateRestaurantForm.addEventListener("submit", function (e) {
     // currently the database table for bsg_people does not allow updating values to NULL
     // so we must abort if being bassed NULL for homeworld
 
-    if (isNaN(foodTypeValue)) 
-    {
-        return;
-    }
+    // if (isNaN(foodTypeValue)) 
+    // {
+    //     return;
+    // }
 
 
     // Put our data we want to send in a javascript object
     let data = {
-        location: locationValue,
-        foodType: foodTypeValue,
+        restaurant_id: locationValue,
+        food_type: foodTypeValue,
     }
     
     // Setup our AJAX request
@@ -72,7 +72,7 @@ function updateRow(data, restaurantID){
             let td = updateRowIndex.getElementsByTagName("td")[2];
 
             // Reassign homeworld to our value we updated to
-            td.innerHTML = parsedData[0].location; 
+            td.innerHTML = parsedData[0].food_type; 
        }
     }
 }
