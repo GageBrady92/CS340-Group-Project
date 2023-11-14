@@ -30,7 +30,7 @@ updateRestaurantForm.addEventListener("submit", function (e) {
         restaurant_id: locationValue,
         food_type: foodTypeValue,
     }
-    
+    console.log(data)
     // Setup our AJAX request
     var xhttp = new XMLHttpRequest();
     xhttp.open("PUT", "/put-restaurant-ajax", true);
@@ -59,7 +59,7 @@ function updateRow(data, restaurantID){
     let parsedData = JSON.parse(data);
     
     let table = document.getElementById("restaurant-table");
-    console.log(data)
+    console.log(table)
     for (let i = 0, row; row = table.rows[i]; i++) {
        //iterate through rows
        //rows would be accessed using the "row" variable assigned in the for loop
@@ -75,4 +75,6 @@ function updateRow(data, restaurantID){
             td.innerHTML = parsedData[0].food_type; 
        }
     }
+    window.location.reload();
 }
+

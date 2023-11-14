@@ -3,7 +3,7 @@
 <p>If you see this text, the server is <strong>definitely</strong> working!</p>
 
 {{!-- Create a table --}}
-<table>
+<table id="restaurant-table">
 
     {{!-- Header section --}}
     <thead>
@@ -90,14 +90,6 @@
 
     <label for="input-food-type-update">Food Type: </label>
     <input type="text" name="input-food-type-update" id="input-food-type-update">
-
-    {{!-- <label for="input-food-type">Food Type: </label>
-    <select name="input-food-type" id="input-food-type-update">
-        <option>Select a Food Type</option>
-        {{#each food-type}}
-        <option value="{{this.restaurant_id}}">{{this.food-type}}</option>
-        {{/each}}
-    </select> --}}
 
     <input type="submit">
 
