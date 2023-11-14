@@ -37,4 +37,5 @@ function deleteRow(restaurantID){
             break;
        }
     }
+    window.location.reload();
 }
