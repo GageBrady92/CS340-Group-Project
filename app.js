@@ -248,7 +248,7 @@ app.get('/chefs', function(req, res)
     // If there is a query string, we assume this is a search, and return desired results
     else
     {
-        query1 = `SELECT * FROM Chefs WHERE location LIKE "${req.query.chefs}%"`
+        query1 = `SELECT * FROM Chefs WHERE chefs LIKE "${req.query.chefs}%"`
     }
 
     db.pool.query(query1, function(error, rows, fields){
