@@ -22,9 +22,6 @@ updateChefForm.addEventListener("submit", function (e) {
     let emailValue = inputEmail.value;
     let chefLocationValue = inputChefLocation.value;
 
-    // currently the database table for bsg_people does not allow updating values to NULL
-    // so we must abort if being bassed NULL for homeworld
-
     // if (isNaN(firstNameValue)) 
     // {
     //     return;
@@ -62,7 +59,6 @@ updateChefForm.addEventListener("submit", function (e) {
             console.log("There was an error with the input.")
         }
     }
-
     // Send the request and wait for the response
     xhttp.send(JSON.stringify(data));
 
@@ -78,16 +74,16 @@ function updateRow(data, chefID){
        //rows would be accessed using the "row" variable assigned in the for loop
        if (table.rows[i].getAttribute("data-value") == chefID) {
 
-            // Get the location of the row where we found the matching person ID
+            // Get the location of the row where we found the matching chef ID
             let updateRowIndex = table.getElementsByTagName("tr")[i];
 
-            // Get td of homeworld value
+            // Get td of each value
             let firstName = updateRowIndex.getElementsByTagName("td")[2];
             let lastName = updateRowIndex.getElementsByTagName("td")[3];
             let email = updateRowIndex.getElementsByTagName("td")[4];
             let location = updateRowIndex.getElementsByTagName("td")[5];
 
-            // Reassign homeworld to our value we updated to
+            // Reassign values we updated to
             firstName.innerHTML = parsedData[0].first_name;
             lastName.innerHTML = parsedData[0].last_name; 
             email.innerHTML = parsedData[0].email; 

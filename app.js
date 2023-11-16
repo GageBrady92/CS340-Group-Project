@@ -55,61 +55,9 @@ app.get('/restaurants', function(req, res)
     })
 });
     
-    app.post('/add-restaurant-ajax', function(req, res) 
-    {
-        // Capture the incoming data and parse it back to a JS object
-        let data = req.body;
-        
-        // Create the query and run it on the database
-        query1 = `INSERT INTO Restaurants (location, food_type) VALUES ('${data.location}', '${data.food_type}')`;
-        db.pool.query(query1, function(error, rows, fields){
-    
-            // Check to see if there was an error
-            if (error) {
-    
-                // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
-                console.log(error)
-                res.sendStatus(400);
-            }
-            else
-            {
-                // If there was no error, perform a SELECT * on bsg_people
-                query2 = `SELECT * FROM Restaurants;`;
-                db.pool.query(query2, function(error, rows, fields){
-    
-                    // If there was an error on the second query, send a 400
-                    if (error) {
-                        
-                        // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
-                        console.log(error);
-                        res.sendStatus(400);
-                    }
-                    // If all went well, send the results of the query back.
-                    else
-                    {
-                        res.send(rows);
-                    }
-                })
-            }
-        })
-    });
-    
     app.post('/add-location-form', function(req, res){
         // Capture the incoming data and parse it back to a JS object
         let data = req.body;
-    
-        // // Capture NULL values
-        // let location = parseInt(data['input-location']);
-        // if (isNaN(location))
-        // {
-        //     location= 'NULL'
-        // }
-    
-        // let food_type = parseInt(data['input-food-type']);
-        // if (isNaN(food_type))
-        // {
-        //     food_type = 'NULL'
-        // }
     
         // Create the query and run it on the database
         query1 = `INSERT INTO Restaurants (location, food_type) VALUES ('${data["input-location"]}', '${data["input-food-type"]}')`;
@@ -127,7 +75,7 @@ app.get('/restaurants', function(req, res)
             // presents it on the screen
             else
             {
-                res.redirect('/');
+                res.redirect('/restaurants');
             }
         })
     })
@@ -308,10 +256,8 @@ app.delete('/delete-chef-ajax/', function(req,res,next){
     let firstName = data.first_name;
     let lastName = data.last_name;
     let chefEmail= data.email;
-    let chefLocation = data.restaurant_id;
+    let chefLocation = parseInt(data.restaurant_id);
     
-    // let queryUpdateRestaurant = `UPDATE Restaurants SET location = ? WHERE Restaurants.restaurant_id = ?`;
-    // let queryUpdateRestaurant = `UPDATE Restaurants SET food_type = ? WHERE restaurant_id = ?`;
     let queryUpdateChef = `UPDATE Chefs SET Chefs.first_name = '${firstName}', Chefs.last_name = '${lastName}', Chefs.email = '${chefEmail}', Chefs.restaurant_id = '${chefLocation}',  WHERE Chefs.chef_id = '${chef}';`;
     let selectChef = `SELECT * FROM Chefs WHERE Chefs.chef_id = '${chef}';`
     
@@ -352,6 +298,30 @@ app.get('/recipes', function(req, res)
     })                                                      
 }); 
 
+app.post('/add-recipe-form', function(req, res){
+    // Capture the incoming data and parse it back to a JS object
+    let data = req.body;
+
+    // Create the query and run it on the database
+    let query1 = `INSERT INTO Recipes (recipe_name, recipe_description, cook_time, food_category, recipe_steps ) VALUES ('${data["input-first-name"]}', '${data["input-last-name"]}','${data["input-email"]}','${data["input-chef-location"]}');`;
+    db.pool.query(query1, function(error, rows, fields){
+
+        // Check to see if there was an error
+        if (error) {
+
+            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+            console.log(error)
+            res.sendStatus(400);
+        }
+
+        // If there was no error, we redirect back to our root route, which automatically runs the SELECT * FROM bsg_people and
+        // presents it on the screen
+        else
+        {
+            res.redirect('/chefs');
+        }
+    })
+});
 
 // Ingredients js
 app.get('/ingredients', function(req, res)
