@@ -22,34 +22,56 @@ app.use(express.static('public'));
 /*
     ROUTES
 */
-// app.js
-
-app.get('/', function(req, res)
-{
-    // Declare Query 1
-    let query1;
-
-    // If there is no query string, we just perform a basic SELECT
-    if (req.query.location === undefined)
-    {
-        query1 = "SELECT * FROM Restaurants;";
-    }
-
-    // If there is a query string, we assume this is a search, and return desired results
-    else
-    {
-        query1 = `SELECT * FROM Restaurants WHERE location LIKE "${req.query.location}%"`
-    }
-
-    db.pool.query(query1, function(error, rows, fields){
-        
-        let location = rows;
-
-            return res.render('index', {data: location});
-    })
+app.get('/', function(req,res){
+    res.render('index');
 });
 
+app.get('/restaurants', function(req, res)
+    {  
+        let queryRestaurants = "SELECT * FROM Restaurants;";              
+
+        db.pool.query(queryRestaurants, function(error, rows, fields){
+
+            res.render('restaurants', {data: rows});                  
+        })                                                      
+    }); 
+// app.get('/restaurants', function(req, res)
+// {
+//     // Declare Query 1
+//     let query1;
+
+//     // If there is no query string, we just perform a basic SELECT
+//     if (req.query.location === undefined)
+//     {
+//         query1 = "SELECT * FROM Restaurants;";
+//     }
+
+//     // If there is a query string, we assume this is a search, and return desired results
+//     else
+//     {
+//         query1 = `SELECT * FROM Restaurants WHERE location LIKE "${req.query.location}%"`
+//     }
+
+//     db.pool.query(query1, function(error, rows, fields){
+        
+//         let location = rows;
+
+//             return res.render('restaurants', {data: location});
+//     })
+// });
+
+app.get('/chefs', function(req, res)
+    {  
+        let queryChefs = "SELECT * FROM Chefs;";              
+
+        db.pool.query(queryChefs, function(error, rows, fields){
+
+            res.render('chefs', {data: rows});                  
+        })                                                      
+    }); 
+
     
+//Add
     app.post('/add-restaurant-ajax', function(req, res) 
     {
         // Capture the incoming data and parse it back to a JS object
@@ -139,6 +161,43 @@ app.get('/', function(req, res)
             }
         })
     })
+    app.post('/add-chef-form', function(req, res){
+        // Capture the incoming data and parse it back to a JS object
+        let data = req.body;
+    
+        // // Capture NULL values
+        // let location = parseInt(data['input-location']);
+        // if (isNaN(location))
+        // {
+        //     location= 'NULL'
+        // }
+    
+        // let food_type = parseInt(data['input-food-type']);
+        // if (isNaN(food_type))
+        // {
+        //     food_type = 'NULL'
+        // }
+    
+        // Create the query and run it on the database
+        query1 = `INSERT INTO Chefs (first_name, ) VALUES ('${data["input-location"]}', '${data["input-food-type"]}')`;
+        db.pool.query(query1, function(error, rows, fields){
+    
+            // Check to see if there was an error
+            if (error) {
+    
+                // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+                console.log(error)
+                res.sendStatus(400);
+            }
+    
+            // If there was no error, we redirect back to our root route, which automatically runs the SELECT * FROM bsg_people and
+            // presents it on the screen
+            else
+            {
+                res.redirect('/');
+            }
+        })
+    })
 
     app.delete('/delete-restaurant-ajax/', function (req, res, next) {
         let data = req.body;
@@ -194,8 +253,6 @@ app.put('/put-restaurant-ajax', function(req,res,next){
     let location = parseInt(data.restaurant_id);
     let foodType = data.food_type;
     
-    // let queryUpdateRestaurant = `UPDATE Restaurants SET location = ? WHERE Restaurants.restaurant_id = ?`;
-    // let queryUpdateRestaurant = `UPDATE Restaurants SET food_type = ? WHERE restaurant_id = ?`;
     let queryUpdateRestaurant = `UPDATE Restaurants SET Restaurants.food_type = '${foodType}' WHERE Restaurants.restaurant_id = '${location}';`;
     let selectRestaurant = `SELECT * FROM Restaurants WHERE Restaurants.restaurant_id = '${location}';`
     
@@ -224,6 +281,8 @@ app.put('/put-restaurant-ajax', function(req,res,next){
                     })
                 }
     })});
+
+
 
 /*
     LISTENER
