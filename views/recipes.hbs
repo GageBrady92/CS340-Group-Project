@@ -32,3 +32,32 @@
         {{/each}}
     </tbody>
 </table>
+
+<h2>Adding Data Using an HTML Form</h2>
+<p>To add a new recipe, please enter their information below and click Submit!</p>
+<form id="add-recipe-form" method="POST" action="/add-recipe-form">
+
+    <label for="input-recipe-name">Recipe Name: </label>
+    <input type="text" name="input-recipe-name" id="input-recipe-name">
+
+    <label for="input-recipe-description">Recipe Description: </label>
+    <input type="text" name="input-recipe-description" id="input-recipe-description">
+
+    <label for="input-cook-time">Cook Time: </label>
+    <input type="text" name="input-cook-time" id="input-cook-time">
+
+    <label for="input-food-category">Food Category: </label>
+    <input type="text" name="input-food-category" id="input-food-category">
+        <div>
+    <label for="input-recipe-steps">Recipe Steps </label>
+    </div>
+    <textarea
+    name="input-recipe-steps" id="input-recipe-steps"
+    rows="5"   cols="50" 
+    minlength="5"
+    maxlength="250"></textarea>
+
+    <div>
+    <input type="submit">
+    </div>
+</form>

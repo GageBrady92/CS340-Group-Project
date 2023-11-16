@@ -303,7 +303,7 @@ app.post('/add-recipe-form', function(req, res){
     let data = req.body;
 
     // Create the query and run it on the database
-    let query1 = `INSERT INTO Recipes (recipe_name, recipe_description, cook_time, food_category, recipe_steps ) VALUES ('${data["input-first-name"]}', '${data["input-last-name"]}','${data["input-email"]}','${data["input-chef-location"]}');`;
+    let query1 = `INSERT INTO Recipes (recipe_name, recipe_description, cook_time, food_category, recipe_steps ) VALUES ('${data["input-recipe-name"]}', '${data["input-recipe-description"]}','${data["input-cook-time"]}','${data["input-food-category"]}','${data["input-recipe-steps"]}');`;
     db.pool.query(query1, function(error, rows, fields){
 
         // Check to see if there was an error
@@ -318,7 +318,7 @@ app.post('/add-recipe-form', function(req, res){
         // presents it on the screen
         else
         {
-            res.redirect('/chefs');
+            res.redirect('/recipes');
         }
     })
 });
