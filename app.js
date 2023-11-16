@@ -23,13 +23,13 @@ app.use(express.static('public'));
     ROUTES
 */
 
-// app.js
-
+// Home route
 app.get('/', function(req, res)
     {
         res.render('index');                    // Note the call to render() and not send(). Using render() ensures the templating engine
     });                                         // will process this file, before sending the finished HTML to the client.
 
+//Restaurants js
 app.get('/restaurants', function(req, res)
 {
     // Declare Query 1
@@ -54,37 +54,6 @@ app.get('/restaurants', function(req, res)
             return res.render('restaurants', {data: location});
     })
 });
-
-app.get('/chefs', function(req, res)
-{  
-    let queryChefs = "SELECT * FROM Chefs;";              
-
-    db.pool.query(queryChefs, function(error, rows, fields){
-
-        res.render('chefs', {data: rows});                  
-    })                                                      
-}); 
-
-app.get('/recipes', function(req, res)
-{  
-    let queryRecipes = "SELECT * FROM Recipes;";              
-
-    db.pool.query(queryRecipes, function(error, rows, fields){
-
-        res.render('recipes', {data: rows});                  
-    })                                                      
-}); 
-
-app.get('/ingredients', function(req, res)
-{  
-    let queryIngredients = "SELECT * FROM Ingredients;";              
-
-    db.pool.query(queryIngredients, function(error, rows, fields){
-
-        res.render('ingredients', {data: rows});                  
-    })                                                      
-}); 
-
     
     app.post('/add-restaurant-ajax', function(req, res) 
     {
@@ -262,6 +231,33 @@ app.put('/put-restaurant-ajax', function(req,res,next){
     })});
 
 
+//Chefs js
+
+
+app.get('/chefs', function(req, res)
+{
+    // Declare Query 1
+    let query1;
+
+    // If there is no query string, we just perform a basic SELECT
+    if (req.query.chefs === undefined)
+    {
+        query1 = "SELECT * FROM Chefs;";
+    }
+
+    // If there is a query string, we assume this is a search, and return desired results
+    else
+    {
+        query1 = `SELECT * FROM Chefs WHERE location LIKE "${req.query.chefs}%"`
+    }
+
+    db.pool.query(query1, function(error, rows, fields){
+        
+        let chef = rows;
+
+            return res.render('chefs', {data: chef});
+    })
+});
 
 app.post('/add-chef-form', function(req, res){
     // Capture the incoming data and parse it back to a JS object
@@ -288,6 +284,29 @@ app.post('/add-chef-form', function(req, res){
     })
 });
 
+
+//Recipes js
+app.get('/recipes', function(req, res)
+{  
+    let queryRecipes = "SELECT * FROM Recipes;";              
+
+    db.pool.query(queryRecipes, function(error, rows, fields){
+
+        res.render('recipes', {data: rows});                  
+    })                                                      
+}); 
+
+
+// Ingredients js
+app.get('/ingredients', function(req, res)
+{  
+    let queryIngredients = "SELECT * FROM Ingredients;";              
+
+    db.pool.query(queryIngredients, function(error, rows, fields){
+
+        res.render('ingredients', {data: rows});                  
+    })                                                      
+}); 
 /*
     LISTENER
 */

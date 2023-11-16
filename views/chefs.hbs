@@ -51,3 +51,13 @@
 
     <input type="submit">
 </form>
+
+<h2>Search Using an HTML Form</h2>
+<p>Search for a Chef using the field below. Partial names are OK too!</p>
+<form id="search-chef-html" method='GET' action='/chefs'>
+    <label for="input-chefs">Search by Chef Name: </label>
+    <input type="text" name="chefs" id="input-chefs-html-search">
+
+    <input type="submit">
+    <a href='/chefs'><button>Reset</button></a>
+</form>
