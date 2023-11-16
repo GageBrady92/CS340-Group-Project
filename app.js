@@ -88,7 +88,7 @@ app.get('/recipes', function(req, res)
         // }
     
         // Create the query and run it on the database
-        query1 = `INSERT INTO Restaurants (location, food_type) VALUES ('${data["input-location"]}', '${data["input-food-type"]}')`;
+        query1 = `INSERT INTO Restaurants (location, food_type) VALUES ('${data["input-location"]}', '${data["input-food-type"]}');`;
         db.pool.query(query1, function(error, rows, fields){
     
             // Check to see if there was an error
@@ -125,7 +125,7 @@ app.get('/recipes', function(req, res)
         // }
     
         // Create the query and run it on the database
-        query1 = `INSERT INTO Chefs (first_name, ) VALUES ('${data["input-location"]}', '${data["input-food-type"]}')`;
+        query1 = `INSERT INTO Chefs (first_name, last_name, email, restaurant_id ) VALUES ('${data["input-first-name"]}', '${data["input-last-name"]}','${data["input-email"]}','${data["input-chef-location"]}');`;
         db.pool.query(query1, function(error, rows, fields){
     
             // Check to see if there was an error
@@ -140,7 +140,7 @@ app.get('/recipes', function(req, res)
             // presents it on the screen
             else
             {
-                res.redirect('/');
+                res.redirect('/chefs');
             }
         })
     })
