@@ -289,14 +289,29 @@ app.delete('/delete-chef-ajax/', function(req,res,next){
 
 //Recipes js
 app.get('/recipes', function(req, res)
-{  
-    let queryRecipes = "SELECT * FROM Recipes;";              
+{
+    // Declare Query 1
+    let query1;
 
-    db.pool.query(queryRecipes, function(error, rows, fields){
+    // If there is no query string, we just perform a basic SELECT
+    if (req.query.recipe_name === undefined)
+    {
+        query1 = "SELECT * FROM Recipes;";
+    }
 
-        res.render('recipes', {data: rows});                  
-    })                                                      
-}); 
+    // If there is a query string, we assume this is a search, and return desired results
+    else
+    {
+        query1 = `SELECT * FROM Recipes WHERE recipe_name LIKE "${req.query.recipe_name}%"`
+    }
+
+    db.pool.query(query1, function(error, rows, fields){
+        
+        let recipe = rows;
+
+            return res.render('recipes', {data: recipe});
+    })
+});
 
 app.post('/add-recipe-form', function(req, res){
     // Capture the incoming data and parse it back to a JS object

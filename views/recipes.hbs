@@ -61,3 +61,50 @@
     <input type="submit">
     </div>
 </form>
+
+<h2>Search Using an HTML Form</h2>
+<p>Search by recipe name using the field below. Partial names are OK too!</p>
+<form id="search-recipe-html" method='GET' action='/recipes'>
+    <label for="input-recipe-name">Search by Location: </label>
+    <input type="text" name="recipe-name" id="input-recipe-html-search">
+
+    <input type="submit">
+    <a href='/recipe'><button>Reset</button></a>
+</form>
+
+<h2>Updating Recipe Form</h2>
+<p>To update a specific recipe select the name from the drop-down menu on the left and update the information</p>
+<form id="update-recipe-form-ajax">
+
+    <label for="input-recipe-name">Recipe: </label>
+    <select name="input-recipe-name" id="mySelect">
+        <option value="test">Select a Location</option>
+        {{#each data}}
+        <option value="{{this.recipe_id}}">{{this.recipe_name}}</option>
+        {{/each}}
+    </select>
+
+    <label for="input-recipe-description-update">Recipe Description: </label>
+    <input type="text" name="input-recipe-description-update" id="input-recipe-description-update">
+
+    <label for="input-cook-time-update">Cook Time: </label>
+    <input type="text" name="input-cook-time-update" id="input-cook-time-update">
+
+    <label for="input-food-category-update">Food Category: </label>
+    <input type="text" name="input-food-category-update" id="input-food-category-update">
+        <div>
+    <label for="input-recipe-steps-update">Recipe Steps </label>
+    </div>
+    <textarea
+    name="input-recipe-steps-update" id="input-recipe-steps-update"
+    rows="5"   cols="50" 
+    minlength="5"
+    maxlength="250"></textarea>
+
+    <div>
+    <input type="submit">
+    </div>
+
+</form>
+
+<script src="./js/update_recipe.js"></script>
