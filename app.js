@@ -59,20 +59,7 @@ app.get('/restaurants', function(req, res)
     {
         // Capture the incoming data and parse it back to a JS object
         let data = req.body;
-    
-        // // Capture NULL values
-        // let homeworld = parseInt(data.homeworld);
-        // if (isNaN(homeworld))
-        // {
-        //     homeworld = 'NULL'
-        // }
-    
-        // let age = parseInt(data.age);
-        // if (isNaN(age))
-        // {
-        //     age = 'NULL'
-        // }
-    
+        
         // Create the query and run it on the database
         query1 = `INSERT INTO Restaurants (location, food_type) VALUES ('${data.location}', '${data.food_type}')`;
         db.pool.query(query1, function(error, rows, fields){
@@ -233,7 +220,6 @@ app.put('/put-restaurant-ajax', function(req,res,next){
 
 //Chefs js
 
-
 app.get('/chefs', function(req, res)
 {
     // Declare Query 1
@@ -253,9 +239,9 @@ app.get('/chefs', function(req, res)
 
     db.pool.query(query1, function(error, rows, fields){
         
-        let chef = rows;
+        let chefs = rows;
 
-            return res.render('chefs', {data: chef});
+            return res.render('chefs', {data: chefs});
     })
 });
 
@@ -284,6 +270,76 @@ app.post('/add-chef-form', function(req, res){
     })
 });
 
+app.delete('/delete-chef-ajax/', function(req,res,next){
+    let data = req.body;
+    let chefID = parseInt(data.chef_id);
+    let deleteChefsRecipesDetails = `DELETE FROM ChefsRecipesDetails WHERE chef_id = ?`;
+    let deleteChefs = `DELETE FROM Chefs WHERE chef_id = ?`;
+  
+  
+          // Run the 1st query
+          db.pool.query(deleteChefsRecipesDetails, [chefID], function(error, rows, fields){
+              if (error) {
+  
+              // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+              console.log(error);
+              res.sendStatus(400);
+              }
+  
+              else
+              {
+                  // Run the second query
+                  db.pool.query(deleteChefs, [chefID], function(error, rows, fields) {
+  
+                      if (error) {
+                          console.log(error);
+                          res.sendStatus(400);
+                      } else {
+                          res.sendStatus(204);
+                      }
+                  })
+              }
+  })});
+
+  app.put('/put-chef-ajax', function(req,res,next){
+    let data = req.body;
+    
+    let chef = parseInt(data.chef_id);
+    let firstName = data.first_name;
+    let lastName = data.last_name;
+    let chefEmail= data.email;
+    let chefLocation = data.restaurant_id;
+    
+    // let queryUpdateRestaurant = `UPDATE Restaurants SET location = ? WHERE Restaurants.restaurant_id = ?`;
+    // let queryUpdateRestaurant = `UPDATE Restaurants SET food_type = ? WHERE restaurant_id = ?`;
+    let queryUpdateChef = `UPDATE Chefs SET Chefs.first_name = '${firstName}', Chefs.last_name = '${lastName}', Chefs.email = '${chefEmail}', Chefs.restaurant_id = '${chefLocation}',  WHERE Chefs.chef_id = '${chef}';`;
+    let selectChef = `SELECT * FROM Chefs WHERE Chefs.chef_id = '${chef}';`
+    
+            // Run the 1st query
+            db.pool.query(queryUpdateChef, [firstName, lastName, chefEmail, chefLocation], function(error, rows, fields){
+                if (error) {
+    
+                // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+                console.log(error);
+                res.sendStatus(400);
+                }
+    
+                // If there was no error, we run our second query and return that data so we can use it to update the people's
+                // table on the front-end
+                else
+                {
+                    // Run the second query
+                    db.pool.query(selectChef, [chef], function(error, rows, fields) {
+    
+                        if (error) {
+                            console.log(error);
+                            res.sendStatus(400);
+                        } else {
+                            res.send(rows);
+                        }
+                    })
+                }
+    })});
 
 //Recipes js
 app.get('/recipes', function(req, res)
