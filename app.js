@@ -23,7 +23,14 @@ app.use(express.static('public'));
     ROUTES
 */
 
+// app.js
+
 app.get('/', function(req, res)
+    {
+        res.render('index');                    // Note the call to render() and not send(). Using render() ensures the templating engine
+    });                                         // will process this file, before sending the finished HTML to the client.
+
+app.get('/restaurants', function(req, res)
 {
     // Declare Query 1
     let query1;
@@ -44,7 +51,7 @@ app.get('/', function(req, res)
         
         let location = rows;
 
-            return res.render('index', {data: location});
+            return res.render('restaurants', {data: location});
     })
 });
 
@@ -65,6 +72,16 @@ app.get('/recipes', function(req, res)
     db.pool.query(queryRecipes, function(error, rows, fields){
 
         res.render('recipes', {data: rows});                  
+    })                                                      
+}); 
+
+app.get('/ingredients', function(req, res)
+{  
+    let queryIngredients = "SELECT * FROM Ingredients;";              
+
+    db.pool.query(queryIngredients, function(error, rows, fields){
+
+        res.render('ingredients', {data: rows});                  
     })                                                      
 }); 
 
@@ -246,30 +263,30 @@ app.put('/put-restaurant-ajax', function(req,res,next){
 
 
 
-// app.post('/add-chef-form', function(req, res){
-//     // Capture the incoming data and parse it back to a JS object
-//     let data = req.body;
+app.post('/add-chef-form', function(req, res){
+    // Capture the incoming data and parse it back to a JS object
+    let data = req.body;
 
-//     // Create the query and run it on the database
-//     let query1 = `INSERT INTO Chefs (first_name, last_name, email, restaurant_id ) VALUES ('${data["input-first-name"]}', '${data["input-last-name"]}','${data["input-email"]}','${data["input-chef-location"]}');`;
-//     db.pool.query(query1, function(error, rows, fields){
+    // Create the query and run it on the database
+    let query1 = `INSERT INTO Chefs (first_name, last_name, email, restaurant_id ) VALUES ('${data["input-first-name"]}', '${data["input-last-name"]}','${data["input-email"]}','${data["input-chef-location"]}');`;
+    db.pool.query(query1, function(error, rows, fields){
 
-//         // Check to see if there was an error
-//         if (error) {
+        // Check to see if there was an error
+        if (error) {
 
-//             // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
-//             console.log(error)
-//             res.sendStatus(400);
-//         }
+            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+            console.log(error)
+            res.sendStatus(400);
+        }
 
-//         // If there was no error, we redirect back to our root route, which automatically runs the SELECT * FROM bsg_people and
-//         // presents it on the screen
-//         else
-//         {
-//             res.redirect('/chefs');
-//         }
-//     })
-// });
+        // If there was no error, we redirect back to our root route, which automatically runs the SELECT * FROM bsg_people and
+        // presents it on the screen
+        else
+        {
+            res.redirect('/chefs');
+        }
+    })
+});
 
 /*
     LISTENER
