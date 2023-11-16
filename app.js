@@ -2,6 +2,7 @@ var express = require('express');
 var app = express();
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
+app.use(express.static('public'));
  
 PORT = 10167;
  
@@ -16,49 +17,34 @@ app.engine('.hbs', exphbs.engine({
 }));
 app.set('view engine', '.hbs');
  
-// Static Files
-app.use(express.static('public'));
-
 /*
     ROUTES
 */
-app.get('/', function(req,res){
-    res.render('index');
-});
 
-app.get('/restaurants', function(req, res)
-    {  
-        let queryRestaurants = "SELECT * FROM Restaurants;";              
+app.get('/', function(req, res)
+{
+    // Declare Query 1
+    let query1;
 
-        db.pool.query(queryRestaurants, function(error, rows, fields){
+    // If there is no query string, we just perform a basic SELECT
+    if (req.query.location === undefined)
+    {
+        query1 = "SELECT * FROM Restaurants;";
+    }
 
-            res.render('restaurants', {data: rows});                  
-        })                                                      
-    }); 
-// app.get('/restaurants', function(req, res)
-// {
-//     // Declare Query 1
-//     let query1;
+    // If there is a query string, we assume this is a search, and return desired results
+    else
+    {
+        query1 = `SELECT * FROM Restaurants WHERE location LIKE "${req.query.location}%"`
+    }
 
-//     // If there is no query string, we just perform a basic SELECT
-//     if (req.query.location === undefined)
-//     {
-//         query1 = "SELECT * FROM Restaurants;";
-//     }
-
-//     // If there is a query string, we assume this is a search, and return desired results
-//     else
-//     {
-//         query1 = `SELECT * FROM Restaurants WHERE location LIKE "${req.query.location}%"`
-//     }
-
-//     db.pool.query(query1, function(error, rows, fields){
+    db.pool.query(query1, function(error, rows, fields){
         
-//         let location = rows;
+        let location = rows;
 
-//             return res.render('restaurants', {data: location});
-//     })
-// });
+            return res.render('index', {data: location});
+    })
+});
 
 app.get('/chefs', function(req, res)
     {  
@@ -70,60 +56,20 @@ app.get('/chefs', function(req, res)
         })                                                      
     }); 
 
+app.get('/recipes', function(req, res)
+    {  
+        let queryRecipes = "SELECT * FROM Recipes;";              
+
+        db.pool.query(queryRecipes, function(error, rows, fields){
+
+            res.render('recipes', {data: rows});                  
+        })                                                      
+    }); 
+  
     
+
 //Add
-    app.post('/add-restaurant-ajax', function(req, res) 
-    {
-        // Capture the incoming data and parse it back to a JS object
-        let data = req.body;
-    
-        // // Capture NULL values
-        // let homeworld = parseInt(data.homeworld);
-        // if (isNaN(homeworld))
-        // {
-        //     homeworld = 'NULL'
-        // }
-    
-        // let age = parseInt(data.age);
-        // if (isNaN(age))
-        // {
-        //     age = 'NULL'
-        // }
-    
-        // Create the query and run it on the database
-        query1 = `INSERT INTO Restaurants (location, food_type) VALUES ('${data.location}', '${data.food_type}')`;
-        db.pool.query(query1, function(error, rows, fields){
-    
-            // Check to see if there was an error
-            if (error) {
-    
-                // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
-                console.log(error)
-                res.sendStatus(400);
-            }
-            else
-            {
-                // If there was no error, perform a SELECT * on bsg_people
-                query2 = `SELECT * FROM Restaurants;`;
-                db.pool.query(query2, function(error, rows, fields){
-    
-                    // If there was an error on the second query, send a 400
-                    if (error) {
-                        
-                        // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
-                        console.log(error);
-                        res.sendStatus(400);
-                    }
-                    // If all went well, send the results of the query back.
-                    else
-                    {
-                        res.send(rows);
-                    }
-                })
-            }
-        })
-    });
-    
+   
     app.post('/add-location-form', function(req, res){
         // Capture the incoming data and parse it back to a JS object
         let data = req.body;
