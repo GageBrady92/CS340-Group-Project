@@ -1,4 +1,4 @@
-<h2>Chefs</h2>
+<h2>Recipes</h2>
 {{!-- Create a table --}}
 <table id="recipes-table">
     {{!-- Header section --}}
@@ -27,7 +27,7 @@
             <td>{{this.cook_time}}</td>
             <td>{{this.food_category}}</td>
             <td>{{this.recipe_steps}}</td>
-            <td><button onclick="deleteRecipe({{this.recipe_id}})">Delete</button></td>
+            {{!-- <td><button onclick="deleteRecipe({{this.recipe_id}})">Delete</button></td> --}}
         </tr>
         {{/each}}
     </tbody>

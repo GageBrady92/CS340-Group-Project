@@ -48,6 +48,26 @@ app.get('/', function(req, res)
     })
 });
 
+app.get('/chefs', function(req, res)
+{  
+    let queryChefs = "SELECT * FROM Chefs;";              
+
+    db.pool.query(queryChefs, function(error, rows, fields){
+
+        res.render('chefs', {data: rows});                  
+    })                                                      
+}); 
+
+app.get('/recipes', function(req, res)
+{  
+    let queryRecipes = "SELECT * FROM Recipes;";              
+
+    db.pool.query(queryRecipes, function(error, rows, fields){
+
+        res.render('recipes', {data: rows});                  
+    })                                                      
+}); 
+
     
     app.post('/add-restaurant-ajax', function(req, res) 
     {
@@ -224,39 +244,32 @@ app.put('/put-restaurant-ajax', function(req,res,next){
                 }
     })});
 
-app.get('/chefs', function(req, res)
-{  
-    let queryChefs = "SELECT * FROM Chefs;";              
 
-    db.pool.query(queryChefs, function(error, rows, fields){
 
-        res.render('chefs', {data: rows});                  
-    })                                                      
-}); 
-app.post('/add-chef-form', function(req, res){
-    // Capture the incoming data and parse it back to a JS object
-    let data = req.body;
+// app.post('/add-chef-form', function(req, res){
+//     // Capture the incoming data and parse it back to a JS object
+//     let data = req.body;
 
-    // Create the query and run it on the database
-    let query1 = `INSERT INTO Chefs (first_name, last_name, email, restaurant_id ) VALUES ('${data["input-first-name"]}', '${data["input-last-name"]}','${data["input-email"]}','${data["input-chef-location"]}');`;
-    db.pool.query(query1, function(error, rows, fields){
+//     // Create the query and run it on the database
+//     let query1 = `INSERT INTO Chefs (first_name, last_name, email, restaurant_id ) VALUES ('${data["input-first-name"]}', '${data["input-last-name"]}','${data["input-email"]}','${data["input-chef-location"]}');`;
+//     db.pool.query(query1, function(error, rows, fields){
 
-        // Check to see if there was an error
-        if (error) {
+//         // Check to see if there was an error
+//         if (error) {
 
-            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
-            console.log(error)
-            res.sendStatus(400);
-        }
+//             // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+//             console.log(error)
+//             res.sendStatus(400);
+//         }
 
-        // If there was no error, we redirect back to our root route, which automatically runs the SELECT * FROM bsg_people and
-        // presents it on the screen
-        else
-        {
-            res.redirect('/chefs');
-        }
-    })
-});
+//         // If there was no error, we redirect back to our root route, which automatically runs the SELECT * FROM bsg_people and
+//         // presents it on the screen
+//         else
+//         {
+//             res.redirect('/chefs');
+//         }
+//     })
+// });
 
 /*
     LISTENER
