@@ -29,7 +29,8 @@ app.get('/', function(req, res)
         res.render('index');                    // Note the call to render() and not send(). Using render() ensures the templating engine
     });                                         // will process this file, before sending the finished HTML to the client.
 
-//Restaurants js
+
+//Restaurants js///////////////////////////////////////
 app.get('/restaurants', function(req, res)
 {
     // Declare Query 1
@@ -136,7 +137,7 @@ app.put('/put-restaurant-ajax', function(req,res,next){
     })});
 
 
-//Chefs js
+//Chefs js/////////////////////////////////////////////////////////
 
 app.get('/chefs', function(req, res)
 {
@@ -257,7 +258,7 @@ app.delete('/delete-chef-ajax/', function(req,res,next){
                 }
     })});
 
-//Recipes js
+//Recipes js//////////////////////////////////////
 app.get('/recipes', function(req, res)
 {
     // Declare Query 1
@@ -347,7 +348,40 @@ app.put('/put-recipe-ajax', function(req,res,next){
                 }
     })});
 
-// Ingredients js
+
+    app.delete('/delete-recipe-ajax/', function(req,res,next){
+        let data = req.body;
+        let recipeID = parseInt(data.recipe_id);
+        let deleteChefsRecipesDetails = `DELETE FROM ChefsRecipesDetails WHERE recipe_id = ?`;
+        let deleteRecipe = `DELETE FROM Recipes WHERE recipe_id = ?`;
+      
+      
+              // Run the 1st query
+              db.pool.query(deleteChefsRecipesDetails, [recipeID], function(error, rows, fields){
+                  if (error) {
+      
+                  // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+                  console.log(error);
+                  res.sendStatus(400);
+                  }
+      
+                  else
+                  {
+                      // Run the second query
+                      db.pool.query(deleteRecipe, [recipeID], function(error, rows, fields) {
+      
+                          if (error) {
+                              console.log(error);
+                              res.sendStatus(400);
+                          } else {
+                              res.sendStatus(204);
+                          }
+                      })
+                  }
+      })});
+    
+
+// Ingredients js/////////////////////////////////////////////////
 app.get('/ingredients', function(req, res)
 {  
     let queryIngredients = "SELECT * FROM Ingredients;";              

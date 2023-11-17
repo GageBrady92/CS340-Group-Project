@@ -78,15 +78,15 @@
 <p>To update a specific recipe select the name from the drop-down menu on the left and update the information</p>
 <form id="update-recipe-form-ajax">
 
-    <label for="input-recipe">Recipe: </label>
-    <select name="input-recipe" id="mySelect">
-        <option value="test">Select a Location</option>
+    <label for="mySelect">Recipe: </label>
+    <select name="input-recipe-update" id="mySelect">
+        <option value="test">Select a Recipe</option>
         {{#each data}}
         <option value="{{this.recipe_id}}">{{this.recipe_name}}</option>
         {{/each}}
     </select>
 
-    <label for="input-recipe-name-update">Recipe Description: </label>
+    <label for="input-recipe-name-update">Recipe Name: </label>
     <input type="text" name="input-recipe-name-update" id="input-recipe-name-update">
     
     <label for="input-recipe-description-update">Recipe Description: </label>
