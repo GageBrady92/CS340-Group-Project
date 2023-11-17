@@ -391,6 +391,101 @@ app.get('/ingredients', function(req, res)
         res.render('ingredients', {data: rows});                  
     })                                                      
 }); 
+
+app.post('/add-ingredient-form', function(req, res){
+    // Capture the incoming data and parse it back to a JS object
+    let data = req.body;
+
+    // Create the query and run it on the database
+    let query1 = `INSERT INTO Ingredients (ingredient_name, ingredient_description ) VALUES ('${data["input-ingredient-name"]}', '${data["input-ingredient-description"]}');`;
+    db.pool.query(query1, function(error, rows, fields){
+
+        // Check to see if there was an error
+        if (error) {
+
+            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+            console.log(error)
+            res.sendStatus(400);
+        }
+
+        // If there was no error, we redirect back to our root route, which automatically runs the SELECT * FROM bsg_people and
+        // presents it on the screen
+        else
+        {
+            res.redirect('/ingredients');
+        }
+    })
+});
+
+app.put('/put-ingredient-ajax', function(req,res,next){
+    let data = req.body;
+    
+    let ingredient = parseInt(data.ingredient_id);
+    let ingredientName = data.ingredient_name;
+    let ingredientDescription = data.ingredient_description;
+    
+    let queryUpdateIngredient = `UPDATE Ingredients SET Ingredients.ingredient_name = '${ingredientName}', Ingredients.ingredient_description= '${ingredientDescription}';`;
+    let selectIngredient = `SELECT * FROM Ingredients WHERE Ingredients.ingredient_id = '${ingredient}';`
+    
+            // Run the 1st query
+            db.pool.query(queryUpdateIngredient, [ingredientName, ingredientDescription], function(error, rows, fields){
+                if (error) {
+    
+                // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+                console.log(error);
+                res.sendStatus(400);
+                }
+    
+                // If there was no error, we run our second query and return that data so we can use it to update the people's
+                // table on the front-end
+                else
+                {
+                    // Run the second query
+                    db.pool.query(selectIngredient, [ingredient], function(error, rows, fields) {
+    
+                        if (error) {
+                            console.log(error);
+                            res.sendStatus(400);
+                        } else {
+                            res.send(rows);
+                        }
+                    })
+                }
+    })});
+
+
+    app.delete('/delete-ingredient-ajax/', function(req,res,next){
+        let data = req.body;
+        let ingredientID = parseInt(data.ingredient_id);
+        let deleteRecipeIngredientDetails = `DELETE FROM RecipeIngredientDetails WHERE ingredient_id = ?`;
+        let deleteIngredient = `DELETE FROM Ingredients WHERE ingredients_id = ?`;
+      
+      
+              // Run the 1st query
+              db.pool.query(deleteRecipeIngredientDetails, [ingredientID], function(error, rows, fields){
+                  if (error) {
+      
+                  // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+                  console.log(error);
+                  res.sendStatus(400);
+                  }
+      
+                  else
+                  {
+                      // Run the second query
+                      db.pool.query(deleteIngredient, [ingredientID], function(error, rows, fields) {
+      
+                          if (error) {
+                              console.log(error);
+                              res.sendStatus(400);
+                          } else {
+                              res.sendStatus(204);
+                          }
+                      })
+                  }
+      })});
+
+
 /*
     LISTENER
 */
