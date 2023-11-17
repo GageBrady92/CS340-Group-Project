@@ -10,16 +10,16 @@ updateRecipeForm.addEventListener("submit", function (e) {
 
     // Get form fields we need to get data from
     let inputRecipe= document.getElementById("mySelect");
-    let inputReciepName= document.getElementById("input-recipe-name-update");
-    let inputReciepDescription= document.getElementById("input-recipe-description-update");
+    let inputRecipeName= document.getElementById("input-recipe-name-update");
+    let inputRecipeDescription= document.getElementById("input-recipe-description-update");
     let inputCookTime= document.getElementById("input-cook-time-update");
     let inputFoodCategory= document.getElementById("input-food-category-update");
     let inputRecipeSteps= document.getElementById("input-recipe-steps-update");
 
     // Get the values from the form fields
     let recipeValue = inputRecipe.value;
-    let recipeNameValue = inputReciepName.value;
-    let recipeDescriptionValue = inputReciepDescription.value;
+    let recipeNameValue = inputRecipeName.value;
+    let recipeDescriptionValue = inputRecipeDescription.value;
     let cookTimeValue = inputCookTime.value;
     let foodCategoryValue = inputFoodCategory.value;
     let recipeStepsValue = inputRecipeSteps.value;
