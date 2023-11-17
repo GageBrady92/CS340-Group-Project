@@ -424,7 +424,7 @@ app.put('/put-ingredient-ajax', function(req,res,next){
     let ingredientName = data.ingredient_name;
     let ingredientDescription = data.ingredient_description;
     
-    let queryUpdateIngredient = `UPDATE Ingredients SET Ingredients.ingredient_name = '${ingredientName}', Ingredients.ingredient_description= '${ingredientDescription}';`;
+    let queryUpdateIngredient = `UPDATE Ingredients SET Ingredients.ingredient_name = '${ingredientName}', Ingredients.ingredient_description= '${ingredientDescription}' WHERE ingredient_id = '${ingredient}'`;
     let selectIngredient = `SELECT * FROM Ingredients WHERE Ingredients.ingredient_id = '${ingredient}';`
     
             // Run the 1st query
@@ -458,7 +458,7 @@ app.put('/put-ingredient-ajax', function(req,res,next){
         let data = req.body;
         let ingredientID = parseInt(data.ingredient_id);
         let deleteRecipeIngredientDetails = `DELETE FROM RecipeIngredientDetails WHERE ingredient_id = ?`;
-        let deleteIngredient = `DELETE FROM Ingredients WHERE ingredients_id = ?`;
+        let deleteIngredient = `DELETE FROM Ingredients WHERE ingredient_id = ?`;
       
       
               // Run the 1st query
