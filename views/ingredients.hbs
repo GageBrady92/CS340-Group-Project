@@ -37,10 +37,10 @@
 <p>To add a new ingredient, please enter the information below and click Submit!</p>
 <form id="add-ingredient-form" method="POST" action="/add-ingredient-form">
 
-    <label for="input-ingredient-name">Recipe Name: </label>
+    <label for="input-ingredient-name">Ingredient Name: </label>
     <input type="text" name="input-ingredient-name" id="input-ingredient-name">
 
-    <label for="input-ingredient-description">Recipe Description: </label>
+    <label for="input-ingredient-description">Ingredient Description: </label>
     <input type="text" name="input-ingredient-description" id="input-ingredient-description">
 
     <div>
@@ -53,7 +53,7 @@
 <p>To update a specific ingredent select the name from the drop-down menu on the left and update the information</p>
 <form id="update-ingredient-form-ajax">
 
-    <label for="mySelect">Recipe: </label>
+    <label for="mySelect">Ingredient: </label>
     <select name="input-ingredient-update" id="mySelect">
         <option value="test">Select an Ingredient</option>
         {{#each data}}
@@ -61,10 +61,10 @@
         {{/each}}
     </select>
 
-    <label for="input-ingredient-name-update">Recipe Name: </label>
+    <label for="input-ingredient-name-update">Ingredient Name: </label>
     <input type="text" name="input-ingredient-name-update" id="input-ingredient-name-update">
     
-    <label for="input-ingredient-description-update">Recipe Description: </label>
+    <label for="input-ingredient-description-update">Ingredient Description: </label>
     <input type="text" name="input-ingredient-description-update" id="input-ingredient-description-update">
 
     <div>
