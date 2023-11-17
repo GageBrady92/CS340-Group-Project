@@ -97,36 +97,6 @@ app.get('/restaurants', function(req, res)
         });
     });
 
-    // app.delete('/delete-person-ajax/', function(req,res,next){
-    //     let data = req.body;
-    //     let personID = parseInt(data.id);
-    //     let deleteBsg_Cert_People = `DELETE FROM bsg_cert_people WHERE pid = ?`;
-    //     let deleteBsg_People= `DELETE FROM bsg_people WHERE id = ?`;
-      
-      
-    //           // Run the 1st query
-    //           db.pool.query(deleteBsg_Cert_People, [personID], function(error, rows, fields){
-    //               if (error) {
-      
-    //               // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
-    //               console.log(error);
-    //               res.sendStatus(400);
-    //               }
-      
-    //               else
-    //               {
-    //                   // Run the second query
-    //                   db.pool.query(deleteBsg_People, [personID], function(error, rows, fields) {
-      
-    //                       if (error) {
-    //                           console.log(error);
-    //                           res.sendStatus(400);
-    //                       } else {
-    //                           res.sendStatus(204);
-    //                       }
-    //                   })
-    //               }
-    //   })});
     
 app.put('/put-restaurant-ajax', function(req,res,next){
     let data = req.body;
@@ -258,7 +228,7 @@ app.delete('/delete-chef-ajax/', function(req,res,next){
     let chefEmail= data.email;
     let chefLocation = parseInt(data.restaurant_id);
     
-    let queryUpdateChef = `UPDATE Chefs SET Chefs.first_name = '${firstName}', Chefs.last_name = '${lastName}', Chefs.email = '${chefEmail}', Chefs.restaurant_id = '${chefLocation}',  WHERE Chefs.chef_id = '${chef}';`;
+    let queryUpdateChef = `UPDATE Chefs SET Chefs.first_name = '${firstName}', Chefs.last_name = '${lastName}', Chefs.email = '${chefEmail}', Chefs.restaurant_id = '${chefLocation}'  WHERE Chefs.chef_id = '${chef}';`;
     let selectChef = `SELECT * FROM Chefs WHERE Chefs.chef_id = '${chef}';`
     
             // Run the 1st query
@@ -337,6 +307,45 @@ app.post('/add-recipe-form', function(req, res){
         }
     })
 });
+
+app.put('/put-recipe-ajax', function(req,res,next){
+    let data = req.body;
+    
+    let recipe = parseInt(data.recipe_id);
+    let recipeName = data.recipe_name;
+    let recipeDescription = data.recipe_description;
+    let cookTime = data.cook_time;
+    let foodCategory = data.food_category;
+    let recipeSteps = data.recipe_steps;
+    
+    let queryUpdateRecipe = `UPDATE Recipes SET Recipes.recipe_name = '${recipeName}', Recipes.recipe_description= '${recipeDescription}', Recipes.cook_time = '${cookTime }', Recipes.food_category = '${foodCategory}', Recipes.recipe_steps = '${recipeSteps}'  WHERE Recipes.recipe_id = '${recipe}';`;
+    let selectRecipe = `SELECT * FROM Recipes WHERE Recipes.recipe_id = '${recipe}';`
+    
+            // Run the 1st query
+            db.pool.query(queryUpdateRecipe, [recipeName, recipeDescription, cookTime, foodCategory, recipeSteps], function(error, rows, fields){
+                if (error) {
+    
+                // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+                console.log(error);
+                res.sendStatus(400);
+                }
+    
+                // If there was no error, we run our second query and return that data so we can use it to update the people's
+                // table on the front-end
+                else
+                {
+                    // Run the second query
+                    db.pool.query(selectRecipe, [chef], function(error, rows, fields) {
+    
+                        if (error) {
+                            console.log(error);
+                            res.sendStatus(400);
+                        } else {
+                            res.send(rows);
+                        }
+                    })
+                }
+    })});
 
 // Ingredients js
 app.get('/ingredients', function(req, res)
