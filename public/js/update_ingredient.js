@@ -10,12 +10,12 @@ updateIngredientForm.addEventListener("submit", function (e) {
 
     // Get form fields we need to get data from
     let inputIngredient= document.getElementById("mySelect");
-    let inputIngredientpName= document.getElementById("input-ingredient-name-update");
+    let inputIngredientName= document.getElementById("input-ingredient-name-update");
     let inputIngredientDescription= document.getElementById("input-ingredient-description-update");
 
     // Get the values from the form fields
-    let IngredientValue = inputIngredient.value;
-    let IngredientNameValue = inputIngredientName.value;
+    let ingredientValue = inputIngredient.value;
+    let ingredientNameValue = inputIngredientName.value;
     let ingredientDescriptionValue = inputIngredientDescription.value;
     
     // currently the database table for bsg_people does not allow updating values to NULL
