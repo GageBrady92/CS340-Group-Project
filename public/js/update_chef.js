@@ -48,11 +48,6 @@ updateChefForm.addEventListener("submit", function (e) {
 
             // Add the new data to the table
             updateRow(xhttp.response, chefValue);
-            // chefValue.value = '';
-            // inputFirstName.value = '';
-            // inputLastName.value = '';
-            // inputEmail.value = '';
-            // inputChefLocation.value = '';
 
         }
         else if (xhttp.readyState == 4 && xhttp.status != 200) {

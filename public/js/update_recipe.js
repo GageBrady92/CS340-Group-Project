@@ -70,7 +70,7 @@ updateRecipeForm.addEventListener("submit", function (e) {
 function updateRow(data, recipeID){
     let parsedData = JSON.parse(data);
     
-    let table = document.getElementById("recipe-table");
+    let table = document.getElementById("recipes-table");
     console.log(table)
     for (let i = 0, row; row = table.rows[i]; i++) {
        //iterate through rows

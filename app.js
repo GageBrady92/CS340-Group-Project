@@ -275,10 +275,10 @@ app.get('/recipes', function(req, res)
     {
         query1 = `SELECT * FROM Recipes WHERE recipe_name LIKE "${req.query.recipe_name}%"`
     }
-
+    console.log(query1)
     db.pool.query(query1, function(error, rows, fields){
         
-        let recipe = rows;
+        let recipe_name = rows;
 
             return res.render('recipes', {data: recipe_name});
     })
@@ -336,7 +336,7 @@ app.put('/put-recipe-ajax', function(req,res,next){
                 else
                 {
                     // Run the second query
-                    db.pool.query(selectRecipe, [chef], function(error, rows, fields) {
+                    db.pool.query(selectRecipe, [recipe], function(error, rows, fields) {
     
                         if (error) {
                             console.log(error);
