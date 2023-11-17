@@ -160,7 +160,7 @@ app.get('/chefs', function(req, res)
         
         let last_name = rows;
 
-            return res.render('chefs', {data: chefs});
+            return res.render('chefs', {data: last_name});
     })
 });
 
