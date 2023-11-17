@@ -280,7 +280,7 @@ app.get('/recipes', function(req, res)
         
         let recipe = rows;
 
-            return res.render('recipes', {data: recipe});
+            return res.render('recipes', {data: recipe_name});
     })
 });
 
