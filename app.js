@@ -145,7 +145,7 @@ app.get('/chefs', function(req, res)
     let query1;
 
     // If there is no query string, we just perform a basic SELECT
-    if (req.query.chefs === undefined)
+    if (req.query.last_name === undefined)
     {
         query1 = "SELECT * FROM Chefs;";
     }
@@ -153,12 +153,12 @@ app.get('/chefs', function(req, res)
     // If there is a query string, we assume this is a search, and return desired results
     else
     {
-        query1 = `SELECT * FROM Chefs WHERE chefs LIKE "${req.query.chefs}%"`
+        query1 = `SELECT * FROM Chefs WHERE last_name LIKE "${req.query.last_name}%"`
     }
-
+    
     db.pool.query(query1, function(error, rows, fields){
         
-        let chefs = rows;
+        let last_name = rows;
 
             return res.render('chefs', {data: chefs});
     })
