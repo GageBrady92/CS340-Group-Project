@@ -281,8 +281,42 @@ app.get('/recipes', function(req, res)
         let recipe_name = rows;
 
             return res.render('recipes', {data: recipe_name});
+    
+
     })
 });
+
+// app.get('/recipes', function(req, res) {
+//     // get recipes
+//     let query1 = "SELECT * FROM Recipes;";
+//     db.pool.query(query1, function(error, rows, fields) {
+//         if (error) {
+//             console.log(error);
+//             res.sendStatus(500); // or handle the error
+//             return;
+//         }
+
+//         // retrieve RecipeIngredientDetails data for each recipe
+//         let query2 = "SELECT * FROM RecipeIngredientDetails;";
+//         db.pool.query(query2, function(error, rows2, fields2) {
+//             if (error) {
+//                 console.log(error);
+//                 res.sendStatus(500); // or handle the error
+//                 return;
+//             }
+
+//             // combine the recipe and ingredient details data
+//             let combinedData = rows.map(recipe => {
+//                 recipe.recipeIngredientDetails = rows2.filter(details => details.recipe_id === recipe.recipe_id);
+//                 return recipe;
+//             });
+
+//             // render the recipes page with the combined data
+//             res.render('recipes', { data: combinedData });
+//         });
+//     });
+// });
+
 
 app.post('/add-recipe-form', function(req, res){
     // Capture the incoming data and parse it back to a JS object
