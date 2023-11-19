@@ -1,4 +1,6 @@
 <h2>Recipes</h2>
+
+<section>
 {{!-- Create a table --}}
 <table id="recipes-table">
     {{!-- Header section --}}
@@ -111,5 +113,37 @@
     </div>
 
 </form>
+</section>
+
+<section>
+    <h2>Recipe Ingredient Details</h2>
+    <table id="recipe-ingredient-table">
+        <thead>
+            <tr>
+                <th>recipe_id</th>
+                <th>ingredient_id</th>
+                <th>quantity</th>
+                <th>unit_measurement</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{!-- NOT WORKING --}}
+            {{#each data}}
+                {{!-- check if the recipe has ingredient details --}}
+                {{#if this.recipeIngredientDetails}}
+                    {{!-- loop through each ingredient detail for the current recipe --}}
+                    {{#each this.recipeIngredientDetails}}
+                        <tr>
+                            <td>{{../recipe_id}}</td>
+                            <td>{{ingredient_id}}</td>
+                            <td>{{quantity}}</td>
+                            <td>{{unit_measurement}}</td>
+                        </tr>
+                    {{/each}}
+                {{/if}}
+            {{/each}}
+        </tbody>
+    </table>
+</section>
 
 <script src="./js/update_recipe.js"></script>
