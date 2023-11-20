@@ -536,7 +536,7 @@ app.post('/add-chef-recipe-form', function(req, res){
             res.sendStatus(400);
         }
 
-        // If there was no error, we redirect back to our ingredient page, which automatically runs the SELECT * FROM ingredient and
+        // If there was no error, we redirect back to our chef recipe page, which automatically runs the SELECT * FROM ChefsRecipesDetails and
         // presents it on the screen
         else
         {
@@ -608,7 +608,7 @@ app.post('/add-recipe-ingredient-form', function(req, res){
     let data = req.body;
 
     // Create the query and run it on the database
-    let query1 = `INSERT INTO RecipeIngredientDetails(recipe_id, ingredient_id, quantity, unit_measurment ) VALUES ('${data["input-recipe-id"]}', '${data["input-ingredient-id"]}', '${data["input-quanity"]}', '${data["input-unit-measurement"]}');`;
+    let query1 = `INSERT INTO RecipeIngredientDetails (recipe_id, ingredient_id, quantity, unit_measurment ) VALUES ('${data["input-recipe-id"]}', '${data["input-ingredient-id"]}', '${data["input-quanity"]}', '${data["input-unit-measurement"]}');`;
     db.pool.query(query1, function(error, rows, fields){
 
         // Check to see if there was an error
@@ -619,7 +619,7 @@ app.post('/add-recipe-ingredient-form', function(req, res){
             res.sendStatus(400);
         }
 
-        // If there was no error, we redirect back to our ingredient page, which automatically runs the SELECT * FROM ingredient and
+        // If there was no error, we redirect back to our recipe ingredient page, which automatically runs the SELECT * FROM RecipeIngredientDetails and
         // presents it on the screen
         else
         {
@@ -627,6 +627,36 @@ app.post('/add-recipe-ingredient-form', function(req, res){
         }
     })
 });
+
+app.delete('/delete-recipe-ingredient-ajax/', function(req,res,next){
+    let data = req.body;
+    let recipeIngredientID = parseInt(data.recipe_ingredient_details_id);
+    let deleteRecipeIgredientDetails = `DELETE FROM RecipeIngredientDetails WHERE recipe_ingredient_details_id = ?`;
+  
+  
+          // Run the 1st query
+          db.pool.query(deleteRecipeIgredientDetails, [recipeIngredientID], function(error, rows, fields){
+              if (error) {
+  
+              // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+              console.log(error);
+              res.sendStatus(400);
+              }
+  
+              else
+              {
+                  // Run the second query
+                  db.pool.query(deleteRecipeIgredientDetails, [recipeIngredientID], function(error, rows, fields) {
+  
+                      if (error) {
+                          console.log(error);
+                          res.sendStatus(400);
+                      } else {
+                          res.sendStatus(204);
+                      }
+                  })
+              }
+  })});
 
 /*
     LISTENER

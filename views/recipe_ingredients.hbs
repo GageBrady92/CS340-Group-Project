@@ -4,9 +4,9 @@
 // 4 # Much of the format is from the node starter guide. Variables and table values original
 // 5 # Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app --}}
 
-<h2>Chefs</h2>
+<h2>Recipe Ingredients</h2>
 {{!-- Create a table --}}
-<table id="chefs-table">
+<table id="recipe-ingredient-table">
     {{!-- Header section --}}
     <thead>
 
@@ -32,10 +32,13 @@
             <td>{{this.ingredient_id}}</td>
             <td>{{this.quantity}}</td>
             <td>{{this.unit_measurement}}</td>
+            <td><button onclick="deleteRecipeIngredient({{this.recipe_ingredient_details_id}})">Delete</button></td>
         </tr>
         {{/each}}
     </tbody>
 </table>
+
+<script src="./js/delete_recipe_ingredient.js"></script>
 
 {{!--Add not working yet--}}
 
