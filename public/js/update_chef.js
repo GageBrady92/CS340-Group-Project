@@ -1,3 +1,8 @@
+// 1 # Citation for the following page:
+// 2 # Date: 11/20/2023
+// 3 # Copied from /OR/ Adapted from /OR/ Based on 
+// 4 # Much of the format is from the node starter guide. Variables and table values original
+// 5 # Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app
 
 // Get the objects we need to modify
 let updateChefForm = document.getElementById('update-chef-form-ajax');
