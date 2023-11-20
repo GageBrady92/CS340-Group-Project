@@ -1,0 +1,59 @@
+{{!-- // 1 # Citation for the following page:
+// 2 # Date: 11/20/2023
+// 3 # Copied from /OR/ Adapted from /OR/ Based on 
+// 4 # Much of the format is from the node starter guide. Variables and table values original
+// 5 # Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app --}}
+
+<h2>Chefs</h2>
+{{!-- Create a table --}}
+<table id="chefs-table">
+    {{!-- Header section --}}
+    <thead>
+
+        {{!-- For just the first row, we print each key of the row object as a header cell so we
+        know what each column means when the page renders --}}
+        <tr>
+            {{#each data.[0]}}
+            <th>
+                {{@key}}
+            </th>
+            {{/each}}
+        </tr>
+    </thead>
+
+    {{!-- Body section --}}
+    <tbody>
+
+        {{!-- For each row header in order --}}
+        {{#each data}}
+        <tr>
+            <td>{{this.recipe_ingredient_details_id}}</td>
+            <td>{{this.recipe_id}}</td>
+            <td>{{this.ingredient_id}}</td>
+            <td>{{this.quantity}}</td>
+            <td>{{this.unit_measurement}}</td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+{{!--Add not working yet--}}
+
+<h2>Adding Data Using an HTML Form</h2>
+<p>To add a Recipe Ingredient, please enter the information below and click `Submit`!</p>
+<form id="add-recipe-ingredient-form" method="POST" action="/add-recipe-ingredient-form">
+    <label for="input-recipe-id">Recipe ID: </label>
+    <input type="text" name="input-recipe-id" id="input-recipe-id">
+    
+    <label for="input-ingredient-id">Ingredient ID: </label>
+    <input type="text" name="input-ingredient-id" id="input-ingredient-id">
+
+    <label for="input-quanity">Quanity: </label>
+    <input type="text" name="input-quanity" id="input-quanity">
+
+    <label for="input-unit-measurement">Unit of Measurement: </label>
+    <input type="text" name="input-unit-measurement" id="input-unit-measurement">
+
+    <input type="submit">
+</form>
+

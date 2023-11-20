@@ -492,7 +492,141 @@ app.put('/put-ingredient-ajax', function(req,res,next){
                       })
                   }
       })});
+// Chef Recipes js //////////////////////////
+app.get('/chef_recipes', function(req, res)
+{
+    // Declare Query 1
+    let query1;
 
+    // If there is no query string, we just perform a basic SELECT
+    if (req.query.chef_id === undefined)
+    {
+        query1 = "SELECT * FROM ChefsRecipesDetails;";
+    }
+
+    // If there is a query string, we assume this is a search, and return desired results
+    else
+    {
+        query1 = `SELECT * FROM ChefsRecipesDetails WHERE chef_id LIKE "${req.query.chef_id}%"`
+    }
+    console.log(query1)
+    db.pool.query(query1, function(error, rows, fields){
+        
+        let chef_id = rows;
+
+            return res.render('chef_recipes', {data: chef_id});
+    
+
+    })
+});
+
+app.post('/add-chef-recipe-form', function(req, res){
+    // Capture the incoming data and parse it back to a JS object
+    let data = req.body;
+
+    // Create the query and run it on the database
+    let query1 = `INSERT INTO ChefsRecipesDetails(chef_id, recipe_id ) VALUES ('${data["input-chef-recipe"]}', '${data["input-recipe-id"]}');`;
+    db.pool.query(query1, function(error, rows, fields){
+
+        // Check to see if there was an error
+        if (error) {
+
+            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+            console.log(error)
+            res.sendStatus(400);
+        }
+
+        // If there was no error, we redirect back to our ingredient page, which automatically runs the SELECT * FROM ingredient and
+        // presents it on the screen
+        else
+        {
+            res.redirect('/chef_recipes');
+        }
+    })
+});
+
+app.delete('/delete-chef-recipe-ajax/', function(req,res,next){
+    let data = req.body;
+    let chefRecipeID = parseInt(data.chefs_recipes_details_id);
+    let deleteChefsRecipesDetails = `DELETE FROM ChefsRecipesDetails WHERE chefs_recipes_details_id = ?`;
+  
+  
+          // Run the 1st query
+          db.pool.query(deleteChefsRecipesDetails, [chefRecipeID], function(error, rows, fields){
+              if (error) {
+  
+              // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+              console.log(error);
+              res.sendStatus(400);
+              }
+  
+              else
+              {
+                  // Run the second query
+                  db.pool.query(deleteChefsRecipesDetails, [chefRecipeID], function(error, rows, fields) {
+  
+                      if (error) {
+                          console.log(error);
+                          res.sendStatus(400);
+                      } else {
+                          res.sendStatus(204);
+                      }
+                  })
+              }
+  })});
+
+// Recipe Ingredient js //////////////////////////
+app.get('/recipe_ingredients', function(req, res)
+{
+    // Declare Query 1
+    let query1;
+
+    // If there is no query string, we just perform a basic SELECT
+    if (req.query.recipe_id === undefined)
+    {
+        query1 = "SELECT * FROM RecipeIngredientDetails;";
+    }
+
+    // If there is a query string, we assume this is a search, and return desired results
+    else
+    {
+        query1 = `SELECT * FROM RecipeIngredientDetails WHERE recipe_id LIKE "${req.query.recipe_id}%"`
+    }
+    console.log(query1)
+    db.pool.query(query1, function(error, rows, fields){
+        
+        let recipe_id = rows;
+
+            return res.render('recipe_ingredients', {data: recipe_id});
+    
+
+    })
+});
+
+app.post('/add-recipe-ingredient-form', function(req, res){
+    // Capture the incoming data and parse it back to a JS object
+    let data = req.body;
+
+    // Create the query and run it on the database
+    let query1 = `INSERT INTO RecipeIngredientDetails(recipe_id, ingredient_id, quantity, unit_measurment ) VALUES ('${data["input-recipe-id"]}', '${data["input-ingredient-id"]}', '${data["input-quanity"]}', '${data["input-unit-measurement"]}');`;
+    db.pool.query(query1, function(error, rows, fields){
+
+        // Check to see if there was an error
+        if (error) {
+
+            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+            console.log(error)
+            res.sendStatus(400);
+        }
+
+        // If there was no error, we redirect back to our ingredient page, which automatically runs the SELECT * FROM ingredient and
+        // presents it on the screen
+        else
+        {
+            res.redirect('/recipe_ingredients');
+        }
+    })
+});
 
 /*
     LISTENER
