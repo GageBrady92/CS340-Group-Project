@@ -22,12 +22,6 @@ updateChefForm.addEventListener("submit", function (e) {
     let emailValue = inputEmail.value;
     let chefLocationValue = inputChefLocation.value;
 
-    // if (isNaN(firstNameValue)) 
-    // {
-    //     return;
-    // }
-
-
     // Put our data we want to send in a javascript object
     let data = {
         chef_id: chefValue,

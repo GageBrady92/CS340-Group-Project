@@ -26,8 +26,8 @@ app.use(express.static('public'));
 // Home route
 app.get('/', function(req, res)
     {
-        res.render('index');                    // Note the call to render() and not send(). Using render() ensures the templating engine
-    });                                         // will process this file, before sending the finished HTML to the client.
+        res.render('index');                    
+    });                                         
 
 
 //Restaurants js///////////////////////////////////////
@@ -72,7 +72,7 @@ app.get('/restaurants', function(req, res)
                 res.sendStatus(400);
             }
     
-            // If there was no error, we redirect back to our root route, which automatically runs the SELECT * FROM bsg_people and
+            // If there was no error, we redirect back to our page, which automatically runs the SELECT * FROM Restaurants and
             // presents it on the screen
             else
             {
@@ -105,8 +105,6 @@ app.put('/put-restaurant-ajax', function(req,res,next){
     let location = parseInt(data.restaurant_id);
     let foodType = data.food_type;
     
-    // let queryUpdateRestaurant = `UPDATE Restaurants SET location = ? WHERE Restaurants.restaurant_id = ?`;
-    // let queryUpdateRestaurant = `UPDATE Restaurants SET food_type = ? WHERE restaurant_id = ?`;
     let queryUpdateRestaurant = `UPDATE Restaurants SET Restaurants.food_type = '${foodType}' WHERE Restaurants.restaurant_id = '${location}';`;
     let selectRestaurant = `SELECT * FROM Restaurants WHERE Restaurants.restaurant_id = '${location}';`
     
@@ -119,7 +117,7 @@ app.put('/put-restaurant-ajax', function(req,res,next){
                 res.sendStatus(400);
                 }
     
-                // If there was no error, we run our second query and return that data so we can use it to update the people's
+                // If there was no error, we run our second query and return that data so we can use it to update the restaurant
                 // table on the front-end
                 else
                 {
@@ -180,7 +178,7 @@ app.post('/add-chef-form', function(req, res){
             res.sendStatus(400);
         }
 
-        // If there was no error, we redirect back to our root route, which automatically runs the SELECT * FROM bsg_people and
+        // If there was no error, we redirect back to chef page, which automatically runs the SELECT * chefs and
         // presents it on the screen
         else
         {
@@ -241,7 +239,7 @@ app.delete('/delete-chef-ajax/', function(req,res,next){
                 res.sendStatus(400);
                 }
     
-                // If there was no error, we run our second query and return that data so we can use it to update the people's
+                // If there was no error, we run our second query and return that data so we can use it to update the chef
                 // table on the front-end
                 else
                 {
@@ -286,37 +284,6 @@ app.get('/recipes', function(req, res)
     })
 });
 
-// app.get('/recipes', function(req, res) {
-//     // get recipes
-//     let query1 = "SELECT * FROM Recipes;";
-//     db.pool.query(query1, function(error, rows, fields) {
-//         if (error) {
-//             console.log(error);
-//             res.sendStatus(500); // or handle the error
-//             return;
-//         }
-
-//         // retrieve RecipeIngredientDetails data for each recipe
-//         let query2 = "SELECT * FROM RecipeIngredientDetails;";
-//         db.pool.query(query2, function(error, rows2, fields2) {
-//             if (error) {
-//                 console.log(error);
-//                 res.sendStatus(500); // or handle the error
-//                 return;
-//             }
-
-//             // combine the recipe and ingredient details data
-//             let combinedData = rows.map(recipe => {
-//                 recipe.recipeIngredientDetails = rows2.filter(details => details.recipe_id === recipe.recipe_id);
-//                 return recipe;
-//             });
-
-//             // render the recipes page with the combined data
-//             res.render('recipes', { data: combinedData });
-//         });
-//     });
-// });
-
 
 app.post('/add-recipe-form', function(req, res){
     // Capture the incoming data and parse it back to a JS object
@@ -334,7 +301,7 @@ app.post('/add-recipe-form', function(req, res){
             res.sendStatus(400);
         }
 
-        // If there was no error, we redirect back to our root route, which automatically runs the SELECT * FROM bsg_people and
+        // If there was no error, we redirect back to our root route, which automatically runs the SELECT * FROM recipes and
         // presents it on the screen
         else
         {
@@ -365,7 +332,7 @@ app.put('/put-recipe-ajax', function(req,res,next){
                 res.sendStatus(400);
                 }
     
-                // If there was no error, we run our second query and return that data so we can use it to update the people's
+                // If there was no error, we run our second query and return that data so we can use it to update the recipe
                 // table on the front-end
                 else
                 {
@@ -442,7 +409,7 @@ app.post('/add-ingredient-form', function(req, res){
             res.sendStatus(400);
         }
 
-        // If there was no error, we redirect back to our root route, which automatically runs the SELECT * FROM bsg_people and
+        // If there was no error, we redirect back to our ingredient page, which automatically runs the SELECT * FROM ingredient and
         // presents it on the screen
         else
         {
@@ -470,7 +437,7 @@ app.put('/put-ingredient-ajax', function(req,res,next){
                 res.sendStatus(400);
                 }
     
-                // If there was no error, we run our second query and return that data so we can use it to update the people's
+                // If there was no error, we run our second query and return that data so we can use it to update the ingredient
                 // table on the front-end
                 else
                 {

@@ -24,15 +24,6 @@ updateRecipeForm.addEventListener("submit", function (e) {
     let foodCategoryValue = inputFoodCategory.value;
     let recipeStepsValue = inputRecipeSteps.value;
     
-    // currently the database table for bsg_people does not allow updating values to NULL
-    // so we must abort if being bassed NULL for homeworld
-
-    // if (isNaN(foodTypeValue)) 
-    // {
-    //     return;
-    // }
-
-
     // Put our data we want to send in a javascript object
     let data = {
         recipe_id: recipeValue,
@@ -77,17 +68,17 @@ function updateRow(data, recipeID){
        //rows would be accessed using the "row" variable assigned in the for loop
        if (table.rows[i].getAttribute("data-value") == recipeID) {
 
-            // Get the location of the row where we found the matching person ID
+            // Get the location of the row where we found the matching recipe ID
             let updateRowIndex = table.getElementsByTagName("tr")[i];
 
-            // Get td of homeworld value
+            // Get td of each value
             let recipeName = updateRowIndex.getElementsByTagName("td")[2];
             let recipeDescription = updateRowIndex.getElementsByTagName("td")[3];
             let cookTime = updateRowIndex.getElementsByTagName("td")[4];
             let foodCategory = updateRowIndex.getElementsByTagName("td")[5];
             let recipeSteps= updateRowIndex.getElementsByTagName("td")[6];
 
-            // Reassign homeworld to our value we updated to
+            // Reassign values we updated to
             recipeName.innerHTML = parsedData[0].recipe_name;
             recipeDescription.innerHTML = parsedData[0].recipe_description; 
             cookTime.innerHTML = parsedData[0].cook_time; 
