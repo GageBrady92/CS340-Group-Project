@@ -25,14 +25,14 @@ updateRecipeIngredientForm.addEventListener("submit", function (e) {
     
     // Put our data we want to send in a javascript object
     let data = {
-        recipe_ingredient_id: recipeIngredientIdValue,
-        quantity: quantityValue ,
-        unit_measurement: unitMeasurementValue ,
+        recipe_ingredient_details_id: recipeIngredientIdValue,
+        quantity: quantityValue,
+        unit_measurement: unitMeasurementValue,
     }
     console.log(data)
     // Setup our AJAX request
     var xhttp = new XMLHttpRequest();
-    xhttp.open("PUT", "/put-recipe-ingredent-ajax", true);
+    xhttp.open("PUT", "/put-recipe-ingredient-ajax", true);
     xhttp.setRequestHeader("Content-type", "application/json");
 
     // Tell our AJAX request how to resolve
@@ -73,7 +73,7 @@ function updateRow(data, recipeIngredientID){
 
             // Reassign values we updated to
             quantity.innerHTML = parsedData[0].quantity;
-            unitMeasurement.innerHTML = parsedData[0].unitMeasurement;  
+            unitMeasurement.innerHTML = parsedData[0].unit_measurement;  
        }
     }
     window.location.reload();
