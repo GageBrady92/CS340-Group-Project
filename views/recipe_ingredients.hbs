@@ -40,7 +40,6 @@
 
 <script src="./js/delete_recipe_ingredient.js"></script>
 
-{{!--Add not working yet--}}
 
 <h2>Adding Data Using an HTML Form</h2>
 <p>To add a Recipe Ingredient, please enter the information below and click `Submit`!</p>
@@ -60,3 +59,38 @@
     <input type="submit">
 </form>
 
+<h2>Updating Recipe Ingredient Form</h2>
+<p>To update a specific recipe ingredient select the name from the drop-down menu on the left and update the information</p>
+<form id="update-recipe-ingredient-form-ajax">
+
+    <label for="mySelect">Recipe Ingredient: </label>
+    <select name="input-recipe-ingredient-update" id="mySelect">
+        <option value="test">Select a Recipe Ingredient</option>
+        {{#each data}}
+        <option value="{{this.recipe_ingredient_details_id}}">{{this.recipe_ingredient_details_id}}</option>
+        {{/each}}
+    </select>
+
+    {{!-- <label for="input-recipe-ingredient-update">Recipe Ingredient ID: </label>
+    <input type="text" name="input-recipe-ingredient-update" id="input-recipe-ingredient-update"> --}}
+
+    {{!-- <label for="input-recipe-id-update">Recipe ID: </label>
+    <input type="text" name="input-recipe-id-update" id="input-recipe-id-update">
+    
+    <label for="input-ingredient-id-update">Ingredient ID: </label>
+    <input type="text" name="input-ingredient-id-update" id="input-ingredient-id-update"> --}}
+
+    <label for="input-quantity-update">Quantity: </label>
+    <input type="text" name="input-quantity-update" id="input-quantity-update">
+
+    <label for="input-unit-measurement-update">Unit Measurement: </label>
+    <input type="text" name="input-unit-measurement-update" id="input-unit-measurement-update">
+        <div>
+
+    <div>
+    <input type="submit">
+    </div>
+
+</form>
+
+<script src="./js/update_recipe_ingredient.js"></script>
