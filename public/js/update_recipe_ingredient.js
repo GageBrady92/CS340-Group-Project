@@ -15,8 +15,8 @@ updateRecipeIngredientForm.addEventListener("submit", function (e) {
 
     // Get form fields we need to get data from
     let inputRecipeIngredientId= document.getElementById("mySelect");
-    let inputQuantity= document.getElementById("input-quantity");
-    let inputUnitMeasurement= document.getElementById("input-unit-measurement");
+    let inputQuantity= document.getElementById("input-quantity-update");
+    let inputUnitMeasurement= document.getElementById("input-unit-measurement-update");
 
     // Get the values from the form fields
     let recipeIngredientIdValue = inputRecipeIngredientId.value;
@@ -29,6 +29,7 @@ updateRecipeIngredientForm.addEventListener("submit", function (e) {
         quantity: quantityValue,
         unit_measurement: unitMeasurementValue,
     }
+
     console.log(data)
     // Setup our AJAX request
     var xhttp = new XMLHttpRequest();
@@ -68,8 +69,8 @@ function updateRow(data, recipeIngredientID){
             let updateRowIndex = table.getElementsByTagName("tr")[i];
 
             // Get td of each value
-            let quantity = updateRowIndex.getElementsByTagName("td")[2];
-            let unitMeasurement = updateRowIndex.getElementsByTagName("td")[3];
+            let quantity = updateRowIndex.getElementsByTagName("td")[3];
+            let unitMeasurement = updateRowIndex.getElementsByTagName("td")[4];
 
             // Reassign values we updated to
             quantity.innerHTML = parsedData[0].quantity;
