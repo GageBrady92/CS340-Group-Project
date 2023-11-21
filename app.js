@@ -10,7 +10,7 @@ var app = express();
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
  
-PORT = 10168;
+PORT = 10167;
  
 // Database
 var db = require('./database/db-connector');
@@ -664,19 +664,13 @@ app.delete('/delete-recipe-ingredient-ajax/', function(req,res,next){
     let data = req.body;
     
     let recipeIngredientID = parseInt(data.recipe_ingredient_details_id);
-    // let recipeID = data.recipe_id;
-    // let ingredientID = data.ingredient_id;
     let quantity = data.quantity;
     let unitMeasurement = data.unit_measurement;
     
-    // let queryUpdateRecipeIngredient = `UPDATE RecipeIngredientDetails SET RecipeIngredientDetails.recipe_ingredient_details_id = '${recipeIngredientID}', RecipeIngredientDetails.recipe_id= '${recipeID}', RecipeIngredientDetails.ingredient_id = '${ingredientID}', RecipeIngredientDetails.quantity = '${quantity}', RecipeIngredientDetails.unit_measurement = '${unitMeasurement}'  WHERE RecipeIngredientDetails.recipe_ingredient_details_id = '${recipeIngredientID}';`;
-    // let selectRecipeIngredient = `SELECT * FROM RecipeIngredientDetails WHERE RecipeIngredientDetails.recipe_ingredient_details_id = '${recipeIngredientID}';`
-    
-    let queryUpdateRecipeIngredient = `UPDATE RecipeIngredientDetails SET RecipeIngredientDetails.quantity = '${quantity}', RecipeIngredientDetails.unit_measurement = '${unitMeasurement}'  WHERE RecipeIngredientDetails.recipe_ingredient_details_id = '${recipeIngredientID}';`;
+    let queryUpdateRecipeIngredient = `UPDATE RecipeIngredientDetails SET RecipeIngredientDetails.quantity = '${quantity}', RecipeIngredientDetails.unit_measurement = '${unitMeasurement}' WHERE RecipeIngredientDetails.recipe_ingredient_details_id = '${recipeIngredientID}';`
     let selectRecipeIngredient = `SELECT * FROM RecipeIngredientDetails WHERE RecipeIngredientDetails.recipe_ingredient_details_id = '${recipeIngredientID}';`
     
             // Run the 1st query
-            // db.pool.query(queryUpdateRecipeIngredient, [recipeIngredientID, recipeID, ingredientID, quantity, unitMeasurement], function(error, rows, fields){
             db.pool.query(queryUpdateRecipeIngredient, [quantity, unitMeasurement], function(error, rows, fields){
                 if (error) {
     
