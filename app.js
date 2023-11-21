@@ -10,7 +10,7 @@ var app = express();
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
  
-PORT = 10167;
+PORT = 10168;
  
 // Database
 var db = require('./database/db-connector');
@@ -608,7 +608,7 @@ app.post('/add-recipe-ingredient-form', function(req, res){
     let data = req.body;
 
     // Create the query and run it on the database
-    let query1 = `INSERT INTO RecipeIngredientDetails (recipe_id, ingredient_id, quantity, unit_measurment ) VALUES ('${data["input-recipe-id"]}', '${data["input-ingredient-id"]}', '${data["input-quanity"]}', '${data["input-unit-measurement"]}');`;
+    let query1 = `INSERT INTO RecipeIngredientDetails (recipe_id, ingredient_id, quantity, unit_measurement ) VALUES ('${data["input-recipe-id"]}', '${data["input-ingredient-id"]}', '${data["input-quantity"]}', '${data["input-unit-measurement"]}');`;
     db.pool.query(query1, function(error, rows, fields){
 
         // Check to see if there was an error
