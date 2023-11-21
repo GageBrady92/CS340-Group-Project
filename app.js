@@ -10,7 +10,7 @@ var app = express();
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
  
-PORT = 10167;
+PORT = 10168;
  
 // Database
 var db = require('./database/db-connector');
@@ -492,6 +492,7 @@ app.put('/put-ingredient-ajax', function(req,res,next){
                       })
                   }
       })});
+
 // Chef Recipes js //////////////////////////
 app.get('/chef_recipes', function(req, res)
 {
@@ -657,6 +658,50 @@ app.delete('/delete-recipe-ingredient-ajax/', function(req,res,next){
                   })
               }
   })});
+
+  app.put('/put-recipe-ingredient-ajax', function(req,res,next){
+    console.log('PUT request received');
+    let data = req.body;
+    
+    let recipeIngredientID = parseInt(data.recipe_ingredient_details_id);
+    // let recipeID = data.recipe_id;
+    // let ingredientID = data.ingredient_id;
+    let quantity = data.quantity;
+    let unitMeasurement = data.unit_measurement;
+    
+    // let queryUpdateRecipeIngredient = `UPDATE RecipeIngredientDetails SET RecipeIngredientDetails.recipe_ingredient_details_id = '${recipeIngredientID}', RecipeIngredientDetails.recipe_id= '${recipeID}', RecipeIngredientDetails.ingredient_id = '${ingredientID}', RecipeIngredientDetails.quantity = '${quantity}', RecipeIngredientDetails.unit_measurement = '${unitMeasurement}'  WHERE RecipeIngredientDetails.recipe_ingredient_details_id = '${recipeIngredientID}';`;
+    // let selectRecipeIngredient = `SELECT * FROM RecipeIngredientDetails WHERE RecipeIngredientDetails.recipe_ingredient_details_id = '${recipeIngredientID}';`
+    
+    let queryUpdateRecipeIngredient = `UPDATE RecipeIngredientDetails SET RecipeIngredientDetails.quantity = '${quantity}', RecipeIngredientDetails.unit_measurement = '${unitMeasurement}'  WHERE RecipeIngredientDetails.recipe_ingredient_details_id = '${recipeIngredientID}';`;
+    let selectRecipeIngredient = `SELECT * FROM RecipeIngredientDetails WHERE RecipeIngredientDetails.recipe_ingredient_details_id = '${recipeIngredientID}';`
+    
+            // Run the 1st query
+            // db.pool.query(queryUpdateRecipeIngredient, [recipeIngredientID, recipeID, ingredientID, quantity, unitMeasurement], function(error, rows, fields){
+            db.pool.query(queryUpdateRecipeIngredient, [quantity, unitMeasurement], function(error, rows, fields){
+                if (error) {
+    
+                // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+                console.log(error);
+                res.sendStatus(400);
+                }
+    
+                // If there was no error, we run our second query and return that data so we can use it to update the recipe
+                // table on the front-end
+                else
+                {
+                    // Run the second query
+                    db.pool.query(selectRecipeIngredient, [recipeIngredientID], function(error, rows, fields) {
+    
+                        if (error) {
+                            console.log(error);
+                            res.sendStatus(400);
+                        } else {
+                            res.send(rows);
+                        }
+                    })
+                }
+    })});
+
 
 /*
     LISTENER
