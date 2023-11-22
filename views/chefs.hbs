@@ -39,8 +39,8 @@
 </table>
 <script src="./js/delete_chef.js"></script>
 
-<h2>Adding Data Using an HTML Form</h2>
-<p>To add a new chef, please enter their information below and click Submit!</p>
+<h2>Add a Chef</h2>
+<p>To add a new chef, please enter their information below and click 'Submit'!</p>
 <form id="add-chef-form" method="POST" action="/add-chef-form">
    
     <label for="input-first-name">First Name: </label>
@@ -58,7 +58,8 @@
     <input type="submit">
 </form>
 
-<h2>Search Using an HTML Form</h2>
+
+<h2>Search for a Chef</h2>
 <p>Search for a Chef by last name using the field below. Partial names are OK too!</p>
 <form id="search-chef-html" method='GET' action='/chefs'>
     <label for="input-last-name">Search by Chef Name: </label>
@@ -68,8 +69,8 @@
     <a href='/chefs'><button>Reset</button></a>
 </form>
 
-<h2>Updating Chef Form</h2>
-<p>To update a specific Chef select the name from the drop-down menu and input their new information</p>
+<h2>Update Chef Information</h2>
+<p>To update a specific Chef, select the name from the drop-down menu and input their new information.</p>
 <form id="update-chef-form-ajax">
 
     <label for="mySelect">Chef: </label>

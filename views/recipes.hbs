@@ -43,8 +43,8 @@
 
 <script src="./js/delete_recipe.js"></script>
 
-<h2>Adding Data Using an HTML Form</h2>
-<p>To add a new recipe, please enter their information below and click Submit!</p>
+<h2>Add a Recipe</h2>
+<p>To add a new recipe, please enter the information below and click 'Submit'!</p>
 <form id="add-recipe-form" method="POST" action="/add-recipe-form">
 
     <label for="input-recipe-name">Recipe Name: </label>
@@ -72,18 +72,8 @@
     </div>
 </form>
 
-{{!-- <h2>Search Using an HTML Form</h2>
-<p>Search by recipe name using the field below. Partial names are OK too!</p>
-<form id="search-recipe-html" method='GET' action='/recipes'>
-    <label for="input-recipe-name">Search by Name: </label>
-    <input type="text" name="input-recipe-name" id="input-recipe-name">
-
-    <input type="submit">
-    <a href='/recipes'><button>Reset</button></a>
-</form> --}}
-
-<h2>Updating Recipe Form</h2>
-<p>To update a specific recipe select the name from the drop-down menu on the left and update the information</p>
+<h2>Update a Recipe</h2>
+<p>To update a specific recipe, select the name from the drop-down menu on the left and update the information.</p>
 <form id="update-recipe-form-ajax">
 
     <label for="mySelect">Recipe: </label>
