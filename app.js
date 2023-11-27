@@ -497,26 +497,28 @@ app.put('/put-ingredient-ajax', function(req,res,next){
 app.get('/chef_recipes', function(req, res)
 {
     // Declare Query 1
-    let query1;
+    let query1 = "SELECT ChefsRecipesDetails, Chefs, Recipes FROM ChefsRecipesDetails INNER JOIN Chefs ON ChefsRecipesDetails.chef_id = Chefs.chef_id INNER JOIN Recipes ON ChefsRecipesDetails.recipe_id = Recipes.recipe_id;";
 
-    // If there is no query string, we just perform a basic SELECT
-    if (req.query.chef_id === undefined)
-    {
-        query1 = "SELECT * FROM ChefsRecipesDetails;";
-    }
+    let query2 = "SELECT ChefsFROM Chefs;";
 
-    // If there is a query string, we assume this is a search, and return desired results
-    else
-    {
-        query1 = `SELECT * FROM ChefsRecipesDetails WHERE chef_id LIKE "${req.query.chef_id}%"`
-    }
+    let query3 = "Select * FROM Recipes;";
+
     console.log(query1)
     db.pool.query(query1, function(error, rows, fields){
         
-        let chef_id = rows;
+        let chef_recipes_details = rows;
 
-            return res.render('chef_recipes', {data: chef_id});
-    
+        db.pool.query(query2, function(error, rows, fields){
+        
+            let chefs = rows;
+
+            db.pool.query(query3, function(error, rows, fields){
+        
+                let recipes = rows;
+
+            return res.render('chef_recipes', {data: chef_recipes_details, chefs: chefs, recipes: recipes});
+            })
+        })
 
     })
 });
