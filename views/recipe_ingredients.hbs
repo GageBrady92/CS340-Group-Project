@@ -44,11 +44,22 @@
 <h2>Adding Recipe Ingredients</h2>
 <p>To add a Recipe Ingredient, please enter the information below and click 'Submit'!</p>
 <form id="add-recipe-ingredient-form" method="POST" action="/add-recipe-ingredient-form">
-    <label for="input-recipe-id">Recipe ID: </label>
-    <input type="text" name="input-recipe-id" id="input-recipe-id">
-    
+
+    <label for="input-recipe-id">Recipe: </label>
+    <select name="input-recipe-id" id="input-recipe-id">
+        <option value="test">Recipe</option>
+        {{#each recipes}}
+        <option value="{{this.recipe_id}}">{{this.recipe_name}}</option>
+        {{/each}}
+    </select>
+
     <label for="input-ingredient-id">Ingredient ID: </label>
-    <input type="text" name="input-ingredient-id" id="input-ingredient-id">
+    <select name="input-ingredient-id" id="input-ingredient-id">
+        <option value="test">Ingredient ID</option>
+        {{#each ingredients}}
+        <option value="{{this.ingredient_id}}">{{this.ingredient_name}}</option>
+        {{/each}}
+    </select>
 
     <label for="input-quanity">Quantity: </label>
     <input type="text" name="input-quantity" id="input-quantity">

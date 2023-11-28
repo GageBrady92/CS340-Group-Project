@@ -20,7 +20,7 @@ function deleteRecipeIngredient(recipeIngredientID) {
         if (xhttp.readyState == 4 && xhttp.status == 204) {
 
             // Add the new data to the table
-            deleteRow(recipeingredientID);
+            deleteRow(recipeIngredientID);
 
         }
         else if (xhttp.readyState == 4 && xhttp.status != 204) {

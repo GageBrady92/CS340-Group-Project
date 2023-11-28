@@ -591,27 +591,28 @@ app.delete('/delete-chef-recipe-ajax/', function(req,res,next){
 app.get('/recipe_ingredients', function(req, res)
 {
     // Declare Query 1
-    let query1;
+    let query1 = "SELECT * FROM RecipeIngredientDetails;";
 
-    // If there is no query string, we just perform a basic SELECT
-    if (req.query.recipe_id === undefined)
-    {
-        query1 = "SELECT * FROM RecipeIngredientDetails;";
-    }
+    let query2 = `SELECT * FROM Recipes;`;
 
-    // If there is a query string, we assume this is a search, and return desired results
-    else
-    {
-        query1 = `SELECT * FROM RecipeIngredientDetails WHERE recipe_id LIKE "${req.query.recipe_id}%"`
-    }
-    console.log(query1)
+    let query3 = `SELECT * FROM Ingredients;`;
+
     db.pool.query(query1, function(error, rows, fields){
         
-        let recipe_id = rows;
+        let recipe_ingredients = rows;
 
-            return res.render('recipe_ingredients', {data: recipe_id});
+        db.pool.query(query2, function(error, rows, fields){
+        
+            let recipes= rows;
+
+            db.pool.query(query3, function(error, rows, fields){
+        
+                let ingredients = rows;
+
+            return res.render('recipe_ingredients', {data: recipe_ingredients, recipes: recipes, ingredients: ingredients});
     
-
+            })
+        })
     })
 });
 
