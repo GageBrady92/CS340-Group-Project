@@ -152,7 +152,9 @@ app.get('/chefs', function(req, res)
     // If there is no query string, we just perform a basic SELECT
     if (req.query.last_name === undefined)
     {
-        query1 = `SELECT * FROM Chefs;`;
+        query1 = `SELECT Chefs.chef_id, Chefs.first_name, Chefs.last_name, Chefs.email, Chefs.restaurant_id, Restaurants.location
+        FROM Chefs
+        INNER JOIN Restaurants ON Chefs.restaurant_id = Restaurants.restaurant_id;`;
     }
 
     // If there is a query string, we assume this is a search, and return desired results
@@ -506,7 +508,8 @@ app.get('/chef_recipes', function(req, res)
     let query1 = `SELECT ChefsRecipesDetails.chefs_recipes_details_id , ChefsRecipesDetails.chef_id, Chefs.first_name, Chefs.last_name, ChefsRecipesDetails.recipe_id, Recipes.recipe_name 
     FROM ChefsRecipesDetails 
     INNER JOIN Chefs ON ChefsRecipesDetails.chef_id = Chefs.chef_id
-    INNER JOIN Recipes ON ChefsRecipesDetails.recipe_id = Recipes.recipe_id;`;
+    INNER JOIN Recipes ON ChefsRecipesDetails.recipe_id = Recipes.recipe_id
+    ORDER BY ChefsRecipesDetails.chefs_recipes_details_id ASC;`;
 
     let query2 = "SELECT * FROM Chefs;";
 
@@ -591,7 +594,12 @@ app.delete('/delete-chef-recipe-ajax/', function(req,res,next){
 app.get('/recipe_ingredients', function(req, res)
 {
     // Declare Query 1
-    let query1 = "SELECT * FROM RecipeIngredientDetails;";
+    let query1 = `SELECT RecipeIngredientDetails.recipe_ingredient_details_id, RecipeIngredientDetails.recipe_id, RecipeIngredientDetails.ingredient_id,
+    RecipeIngredientDetails.quantity, RecipeIngredientDetails.unit_measurement, Recipes.recipe_name, Ingredients.ingredient_name 
+    FROM RecipeIngredientDetails 
+    INNER JOIN Recipes ON RecipeIngredientDetails.recipe_id = Recipes.recipe_id
+    INNER JOIN Ingredients ON RecipeIngredientDetails.ingredient_id = Ingredients.ingredient_id
+    ORDER BY RecipeIngredientDetails.recipe_ingredient_details_id ASC;`;
 
     let query2 = `SELECT * FROM Recipes;`;
 
