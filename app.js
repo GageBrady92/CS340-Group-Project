@@ -497,11 +497,14 @@ app.put('/put-ingredient-ajax', function(req,res,next){
 app.get('/chef_recipes', function(req, res)
 {
     // Declare Query 1
-    let query1 = "SELECT ChefsRecipesDetails, Chefs, Recipes FROM ChefsRecipesDetails INNER JOIN Chefs ON ChefsRecipesDetails.chef_id = Chefs.chef_id INNER JOIN Recipes ON ChefsRecipesDetails.recipe_id = Recipes.recipe_id;";
+    let query1 = `SELECT ChefsRecipesDetails.chefs_recipes_details_id , ChefsRecipesDetails.chef_id, Chefs.first_name, Chefs.last_name, ChefsRecipesDetails.recipe_id, Recipes.recipe_name 
+    FROM ChefsRecipesDetails 
+    INNER JOIN Chefs ON ChefsRecipesDetails.chef_id = Chefs.chef_id
+    INNER JOIN Recipes ON ChefsRecipesDetails.recipe_id = Recipes.recipe_id;`;
 
-    let query2 = "SELECT ChefsFROM Chefs;";
+    let query2 = "SELECT * FROM Chefs;";
 
-    let query3 = "Select * FROM Recipes;";
+    let query3 = "SELECT * FROM Recipes;";
 
     console.log(query1)
     db.pool.query(query1, function(error, rows, fields){
@@ -528,7 +531,7 @@ app.post('/add-chef-recipe-form', function(req, res){
     let data = req.body;
 
     // Create the query and run it on the database
-    let query1 = `INSERT INTO ChefsRecipesDetails(chef_id, recipe_id ) VALUES ('${data["input-chef-recipe"]}', '${data["input-recipe-id"]}');`;
+    let query1 = `INSERT INTO ChefsRecipesDetails(chef_id, recipe_id ) VALUES ('${data["input-chef-id"]}', '${data["input-recipe-id"]}');`;
     db.pool.query(query1, function(error, rows, fields){
 
         // Check to see if there was an error
