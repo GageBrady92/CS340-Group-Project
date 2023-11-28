@@ -52,8 +52,13 @@
     <label for="input-email">Email: </label>
     <input type="text" name="input-email" id="input-email">
 
-    <label for="input-chef-location">Restaurant ID: </label>
-    <input type="number" name="input-chef-location" id="input-chef-location">
+
+    <label for="input-chef-location">Chef Location: </label>
+    <select name="input-chef-location" id="input-chef-location">
+        <option value="test">Select a Location</option>
+        {{#each restaurants}}
+        <option value="{{this.restaurant_id}}">{{this.location}}</option>
+    {{/each}}
 
     <input type="submit">
 </form>
@@ -90,8 +95,14 @@
     <label for="input-email-update">Email: </label>
     <input type="text" name="input-email-update" id="input-email-update">
 
-    <label for="input-chef-location-update">Restaurant ID: </label>
-    <input type="number" name="input-chef-location-update" id="input-chef-location-update">
+    <label for="input-chef-location-update">Chef Location: </label>
+    <select name="input-chef-location-update" id="input-chef-location-update">
+        <option value="test">Select a Location</option>
+        {{#each restaurants}}
+        <option value="{{this.restaurant_id}}">{{this.location}}</option>
+    {{/each}}
+    </select>
+
 
     <input type="submit">
 

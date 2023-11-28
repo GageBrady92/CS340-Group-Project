@@ -152,7 +152,7 @@ app.get('/chefs', function(req, res)
     // If there is no query string, we just perform a basic SELECT
     if (req.query.last_name === undefined)
     {
-        query1 = "SELECT * FROM Chefs;";
+        query1 = `SELECT * FROM Chefs;`;
     }
 
     // If there is a query string, we assume this is a search, and return desired results
@@ -161,11 +161,17 @@ app.get('/chefs', function(req, res)
         query1 = `SELECT * FROM Chefs WHERE last_name LIKE "${req.query.last_name}%"`
     }
     
+    let query2 = 'SELECT * from Restaurants'
     db.pool.query(query1, function(error, rows, fields){
         
-        let last_name = rows;
+        let chefs = rows;
 
-            return res.render('chefs', {data: last_name});
+        db.pool.query(query2, function(error, rows, fields){
+        
+            let restaurants = rows;
+
+            return res.render('chefs', {data: chefs, restaurants: restaurants});
+        })
     })
 });
 
@@ -531,7 +537,7 @@ app.post('/add-chef-recipe-form', function(req, res){
     let data = req.body;
 
     // Create the query and run it on the database
-    let query1 = `INSERT INTO ChefsRecipesDetails(chef_id, recipe_id ) VALUES ('${data["input-chef-id"]}', '${data["input-recipe-id"]}');`;
+    let query1 = `INSERT INTO ChefsRecipesDetails(chef_id, recipe_id ) VALUES ('${data["input-chef-id"]}', '${data["input-chef-recipe-id"]}');`;
     db.pool.query(query1, function(error, rows, fields){
 
         // Check to see if there was an error
