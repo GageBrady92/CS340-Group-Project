@@ -53,9 +53,9 @@
         {{/each}}
     </select>
 
-    <label for="input-ingredient-id">Ingredient ID: </label>
+    <label for="input-ingredient-id">Ingredient: </label>
     <select name="input-ingredient-id" id="input-ingredient-id">
-        <option value="test">Ingredient ID</option>
+        <option value="test">Ingredient</option>
         {{#each ingredients}}
         <option value="{{this.ingredient_id}}">{{this.ingredient_name}}</option>
         {{/each}}
@@ -74,9 +74,9 @@
 <p>To update a specific recipe ingredient, select the name from the drop-down menu and update the information.</p>
 <form id="update-recipe-ingredient-form-ajax">
 
-    <label for="mySelect">Recipe Ingredient: </label>
+    <label for="mySelect">Recipe Ingredient ID: </label>
     <select name="input-recipe-ingredient-update" id="mySelect">
-        <option value="test">Select a Recipe Ingredient</option>
+        <option value="test">Select a Recipe Ingredient ID</option>
         {{#each data}}
         <option value="{{this.recipe_ingredient_details_id}}">{{this.recipe_ingredient_details_id}}</option>
         {{/each}}
