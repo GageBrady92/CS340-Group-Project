@@ -3,7 +3,7 @@
 // 3 # Copied from /OR/ Adapted from /OR/ Based on 
 // 4 # Much of the format is from the node starter guide. Variables and SQL for tables are original
 // 5 # Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app
-6
+
 
 var express = require('express');
 var app = express();
