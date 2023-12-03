@@ -1,3 +1,9 @@
+// 1 # Citation for the following page:
+// 2 # Date: 11/20/2023
+// 3 # Based on 
+// 4 # Project goals, specifications, and rules are from source. Specific database implementation is unique.
+// 5 # Source URL: https://canvas.oregonstate.edu/courses/1933532/pages/cs340-project-guide
+
 CS340 Project Guide
 Project Goals
 
