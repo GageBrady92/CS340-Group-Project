@@ -1,5 +1,9 @@
-/*  ===== MOBILE styles (reside at the top and are inherited by all devices) ===== */
-/*  ===== See tablet, desktop, and print @media queries at the bottom. */
+/* 
+// 1 # Citation for the following page:
+// 2 # Date: 11/20/2023
+// 3 # Adapted from CS 290 Web Development css code
+// 4 # The format and layout is from the starter guide. All design choices and elements are unique to this project.
+*/
 
 /*   ----- Imports  -----  */
 
@@ -180,21 +184,9 @@ form {
   }
   
   fieldset {
-    /* border: 2px solid var(--midBlue);
-    background-color: white;
-    padding: 20px;
-    border-radius: 8px;
-    margin-top: 20px;
-    width: 100%;
-    box-sizing: border-box; */
   }
   
   legend {
-    /* color: var(--midBlue);
-    font-size: 1.5em;
-    font-weight: bold;
-    margin-bottom: 5px;
-    padding: 0 10px; */
   }
   
   label {
