@@ -1,12 +1,6 @@
-// 1 # Citation for the following page:
-// 2 # Date: 11/20/2023
-// 3 # Based on 
-// 4 # Project goals, specifications, and rules are from source. Specific database implementation is unique.
-// 5 # Source URL: https://canvas.oregonstate.edu/courses/1933532/pages/cs340-project-guide
-
 CS340 Project Guide
-Project Goals
 
+Project Goals
 Implement all the database-related skills that you learn in this course as well as CS290.
 Understand how to transform an idea into a database.
 Learn how to develop a web-based UI for your database for providing Create-Read-Update-Delete (CRUD) functionalitiesLinks to an external site..
@@ -42,3 +36,14 @@ The CS340 Project that you will submit at the end of this course should satisfy 
 -You should be able to DELETE a record from a M:M relationship without creating a data anomaly in the related tables. For example, DELETEing a Customer should handle any Orders that were made by the Customer. This can be done by either by setting the CustomerID to NULL, or else by DELETEing any Order(s) associated with that Customer. More on how this can be done in Week 5 when we cover MySQL CASCADELinks to an external site.. 
 
 -To continue the example from above, if you have 5 tables in your schema, then at a minimum, we expect you to implement 5 SELECTs, 5 INSERTs, 1 UPDATE (1 NULLable relationship), 1 DELETE (M:M), and 1 Dynamic drop-down/Search for a total of 14 functions. 
+
+Citations:
+
+// 1 # Citation for main.css page:
+// 2 # Adapted from CS 290 Web Development css code.
+// 3 # The format and layout is from the starter guide. All design choices and elements are unique to this project.
+
+// 1 # Citation for the .hbs and .js pages:
+// 2 # Adapted from node.js starter app.
+// 3 # Much of the format is from the node starter guide. Variables and table values original
+// 4 # Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app
